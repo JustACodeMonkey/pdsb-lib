@@ -7,7 +7,13 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build_lib": "ng build pdsb-lib --prod",
+    "copy-license": "@powershell copy ./LICENSE ./dist/pdsb-lib",
+    "copy-readme": "@powershell copy ./README.md ./dist/pdsb-lib",
+    "copy-files": "npm run copy-license && npm run copy-readme",
+    "npm_pack": "cd dist/pdsb-lib && npm pack",
+    "package": "npm run build_lib && npm run copy-files && npm run npm_pack"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +30,8 @@
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "~0.1000.6",
+    "@angular-devkit/build-ng-packagr": "~0.1000.6",
     "@angular/cli": "~10.0.3",
     "@angular/compiler-cli": "~10.0.4",
     "@types/node": "^12.11.1",
@@ -37,6 +45,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~3.3.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "ng-packagr": "^10.0.0",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
