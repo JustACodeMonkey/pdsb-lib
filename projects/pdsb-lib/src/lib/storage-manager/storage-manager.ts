@@ -21,7 +21,7 @@ export class StorageManager extends ManagerBase implements IManager {
      * Returns the Item with the associated key
      * @param key string
      */
-    find(key: string) {
+    find(key: string): Item {
         const commonPath = this._pathFromKey(key, true);
         const basePath = this._pathFromKey(key, false);
         let item: Item;
@@ -42,7 +42,7 @@ export class StorageManager extends ManagerBase implements IManager {
      * Gets the item from the local / session storage
      * @param item Item
      */
-    get(item: Item) {
+    get(item: Item): Item {
         const path = this._path(item);
         const json = this._storage(item).getItem(path);
         return JSON.parse(json);
@@ -53,7 +53,7 @@ export class StorageManager extends ManagerBase implements IManager {
      * @param item Item
      * @param val string | number | boolean | object | Array<any>
      */
-    set(item: Item, val: string | number | boolean | object | Array<any>) {
+    set(item: Item, val: string | number | boolean | object | Array<any>): boolean {
         const path = this._path(item);
         const json = JSON.stringify(val);
         this._storage(item).setItem(path, json);
@@ -64,7 +64,7 @@ export class StorageManager extends ManagerBase implements IManager {
      * Removes the item from local / session storage
      * @param item Item
      */
-    remove(item: Item) {
+    remove(item: Item): boolean {
         const path = this._path(item);
         this._storage(item).removeItem(path);
         return true;
@@ -74,7 +74,7 @@ export class StorageManager extends ManagerBase implements IManager {
      * Returns the local or session storage pointer
      * @param item Item
      */
-    private _storage(item: Item) {
+    private _storage(item: Item): Storage {
         return item.expires ? this._ss : this._ls;
     }
 }

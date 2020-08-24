@@ -18,7 +18,7 @@ export class CookieManager extends ManagerBase implements IManager {
      * Static method to read a cookie (can be used outside of the main storage manager service)
      * @param name string
      */
-    static read(name: string) {
+    static read(name: string): string {
         const cookies = DocRef.doc.cookie.split(';');
         let json;
         for (let i = 0; i < cookies.length; i++) {
@@ -41,7 +41,7 @@ export class CookieManager extends ManagerBase implements IManager {
      * @param expires boolean
      * @param path string
      */
-    static write(name: string, val: string, expires: boolean, path?: string) {
+    static write(name: string, val: string, expires: boolean, path?: string): boolean {
         const strVal     = encodeURIComponent(val);
         const strExpires = (expires ? '' : ';expires=Fri, 31 Dec 9999 23:59:59 GMT');
         const strPath    = ';path=' + (path || '/');
@@ -56,7 +56,7 @@ export class CookieManager extends ManagerBase implements IManager {
      * Returns the Item with the associated key
      * @param key string
      */
-    find(key: string) {
+    find(key: string): Item {
         let item: Item;
 
         if (this.get(new Item(key, true, true))) {
@@ -76,7 +76,7 @@ export class CookieManager extends ManagerBase implements IManager {
      * @param key string - The name of the cookie
      * @param expires boolean - Whether or not the cookie expires
      */
-    get(item: Item) {
+    get(item: Item): Item {
         const path = this._path(item);
         const json = CookieManager.read(path);
         return json ? JSON.parse(json) : null;
@@ -88,7 +88,7 @@ export class CookieManager extends ManagerBase implements IManager {
      * @param val string - The stringified JSON value of the cookie
      * @param expires boolean - Whether or not the cookie expires
      */
-    set(item: Item, val: string | number | boolean | object | Array<any>) {
+    set(item: Item, val: string | number | boolean | object | Array<any>): boolean {
         const path = this._path(item);
         const json = JSON.stringify(val);
         return CookieManager.write(path, json, item.expires);
@@ -99,7 +99,7 @@ export class CookieManager extends ManagerBase implements IManager {
      * @param key string - The name of the cookie to remove
      * @param expires boolean - Whether or not the cookie expires
      */
-    remove(item: Item) {
+    remove(item: Item): boolean {
         const path = this._path(item);
         DocRef.doc.cookie = path + '=';
         return true;
@@ -110,7 +110,7 @@ export class CookieManager extends ManagerBase implements IManager {
      * @param key string - The name of the cookie
      * @param expires boolean - Whether or not the cookie expires
      */
-    protected _path(item: Item) {
+    protected _path(item: Item): string {
         return super._path(item) + (item.expires ? '' : '/!');
     }
 }

@@ -23,7 +23,7 @@ export class ManagerBase {
      * Returns the path for the specific item
      * @param item Item
      */
-    protected _path(item: Item) {
+    protected _path(item: Item): string {
         return (item.common ? this.COMMON : this.BASE) + item.key;
     }
 
@@ -32,7 +32,7 @@ export class ManagerBase {
      * @param key string
      * @param common boolean
      */
-    protected _pathFromKey(key: string, common: boolean) {
+    protected _pathFromKey(key: string, common: boolean): string {
         return (common ? this.COMMON : this.BASE) + key;
     }
 }

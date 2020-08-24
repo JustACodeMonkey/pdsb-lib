@@ -7,6 +7,7 @@ import { StorageManager } from './storage-manager';
 import { DocRef } from './doc-ref';
 import { WinRef } from './win-ref';
 
+/** @dynamic */
 @Injectable({
     providedIn: 'root'
 })
@@ -22,13 +23,13 @@ export class StorageManagerService {
     private _tracked      = new Item('psm', true, false);
 
     constructor(
-        @Inject(DOCUMENT) private _doc: any
+        @Inject(DOCUMENT) private _doc: Document
     ) {
         // We need to get global references to the Document and Window before
         // creating the StorageManager or CookieManager.
         // This allows them to use them without referencing document or window
         // directly within the code.
-        this._doc  = this._doc as Document;
+        this._doc  = this._doc;
         DocRef.doc = this._doc;
         WinRef.win = this._doc.defaultView;
 
@@ -43,7 +44,7 @@ export class StorageManagerService {
      * - If local/session storage is available, it will be used
      * - If not, then cookies are used
      */
-    private _canUseStorage() {
+    private _canUseStorage(): boolean {
         const key = 'test';
         const ls  = WinRef.win.localStorage;
         ls.setItem(key, 'test');
@@ -65,7 +66,7 @@ export class StorageManagerService {
      * - If so, it deletes it and writes it into the new theme cookie
      * - Otherwise, it reads the new theme cookie
      */
-    getTheme() {
+    getTheme(): string {
         if (!this._themeChecked) {
             this._themeChecked = true;
             const old = CookieManager.read(this._OLD_THEME);
@@ -82,7 +83,7 @@ export class StorageManagerService {
      * Sets the theme
      * @param val string
      */
-    setTheme(val: string) {
+    setTheme(val: string): boolean {
         return CookieManager.write(this._THEME, val, false);
     }
 
@@ -129,7 +130,7 @@ export class StorageManagerService {
      * @param key They key of the item to remove
      * @param track true ? update the tracking session : don't update
      */
-    remove(key: string, track: boolean = true) {
+    remove(key: string, track: boolean = true): boolean {
         const item = this._items[key] || this._find(key);
         if (item) {
             try {
@@ -150,7 +151,7 @@ export class StorageManagerService {
      * Removes all expiring items from session and local storage
      * @param force true ? only /COMMON/ && /BASE_HREF/ items in session storage : only /BASE_HREF/ items in session storage
      */
-    removeAll(force: boolean = false) {
+    removeAll(force: boolean = false): void {
         const keys = Object.keys(this._items);
         for (const key of keys) {
             const item = this._items[key];
@@ -164,7 +165,7 @@ export class StorageManagerService {
     /**
      * Gets the application base (from the HTML file)
      */
-    private _setOldThemeBase() {
+    private _setOldThemeBase(): void {
         const bases = document.getElementsByTagName('base');
         if (bases.length > 0) {
             this._oldThemeBase = bases[0].attributes['href'].nodeValue as string;
@@ -176,7 +177,7 @@ export class StorageManagerService {
      * - If an item is found, it is added to the tracker
      * @param key string
      */
-    private _find(key: string) {
+    private _find(key: string): Item {
         const item = this._manager.find(key);
         if (item) {
             this._items[key] = item;
@@ -188,7 +189,7 @@ export class StorageManagerService {
     /**
      * Updates the tracking storage
      */
-    private _track() {
+    private _track(): void {
         this._manager.set(this._tracked, this._items);
     }
 }

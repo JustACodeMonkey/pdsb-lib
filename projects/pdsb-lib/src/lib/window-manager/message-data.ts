@@ -14,7 +14,7 @@ export class MessageData {
      * Derived from window.name in the child window. This name will match the name
      * from when the window was created
      */
-    appId:   string;
+    appId: string;
 
     /**
      * The full name of the application running in the child window
@@ -24,7 +24,7 @@ export class MessageData {
     /**
      * The action the receiving window should perform
      */
-    action:  string;
+    action: string;
 
     /**
      * The message body that is sent

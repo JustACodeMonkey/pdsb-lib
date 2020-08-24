@@ -1,7 +1,9 @@
 import { Injectable, RendererFactory2, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { MessageData } from './message-data';
+import { DOCUMENT } from '@angular/common';
 
+/** @dynamic */
 @Injectable({
     providedIn: 'root'
 })
@@ -24,7 +26,7 @@ export class WindowManagerService {
 
     constructor(
         private _rf: RendererFactory2,
-        @Inject(Document) private _doc: any
+        @Inject(DOCUMENT) private _doc: Document
     ) {
         this._win = (this._doc as Document).defaultView;
         this.initListener();
@@ -33,14 +35,14 @@ export class WindowManagerService {
     /**
      * Returns a reference to the parent window || null
      */
-    get parentWindow() {
+    get parentWindow(): Window {
         return this._win.opener || null;
     }
 
     /**
      * Returns a reference to this window || null
      */
-    get thisWindow() {
+    get thisWindow(): Window {
         return this._win || null;
     }
 
@@ -49,7 +51,7 @@ export class WindowManagerService {
      * @param url The URL to open
      * @param name The name of the window
      */
-    open(url: string, name: string) {
+    open(url: string, name: string): void {
         const win = this.getWindow(name);
         if (win && !win.closed) {
             win.location.href = url;
@@ -64,7 +66,7 @@ export class WindowManagerService {
      * @param name The name of the window to close
      *             Pass null to close this window
      */
-    close(name: string) {
+    close(name: string): void {
         if (!name) {
             this.thisWindow.close();
         } else {
@@ -79,7 +81,7 @@ export class WindowManagerService {
     /**
      * Closes all open windows
      */
-    closeAll() {
+    closeAll(): void {
         for (const prop in this._children) {
             this.close(prop);
         }
@@ -91,7 +93,7 @@ export class WindowManagerService {
      * @param message The message to send
      * @param targetOrigin The targetOrigin (optional - leave blank)
      */
-    postToChild(name: string, message: any, targetOrigin: string = '*') {
+    postToChild(name: string, message: any, targetOrigin: string = '*'): void {
         this.post(this.getWindow(name), message, targetOrigin);
     }
 
@@ -100,7 +102,7 @@ export class WindowManagerService {
      * @param message The message to send
      * @param targetOrigin The targetOrigin (optional - leave blank)
      */
-    postToParent(message: any, targetOrigin: string = '*') {
+    postToParent(message: any, targetOrigin: string = '*'): void {
         this.post(this.parentWindow, message, targetOrigin);
     }
 
@@ -108,9 +110,9 @@ export class WindowManagerService {
      * Posts a message to a child or parent window
      * @param win The window reference to post to
      * @param message The message to send
-     * @param targetOrigin 
+     * @param targetOrigin The targetOrigin
      */
-    private post(win: Window, message: any, targetOrigin: string) {
+    private post(win: Window, message: any, targetOrigin: string): void {
         if (win) {
             win.postMessage(message, targetOrigin);
         }
@@ -134,7 +136,7 @@ export class WindowManagerService {
     /**
      * Listens for messages from other windows
      */
-    private initListener() {
+    private initListener(): void {
         this._rf
             .createRenderer(null, null)
             .listen('window', 'message', (e: MessageEvent) => {
