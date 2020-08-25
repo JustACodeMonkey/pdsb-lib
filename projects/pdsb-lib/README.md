@@ -1,54 +1,62 @@
 # pdsb-lib
-This library contains two simple services that can be used with projects at the Peel District School Board.
+This library contains components and services to support SIS Angular applications at the Peel District School Board.
 
-# StorageManagerService
-- Simple web storage manager to work with multiple apps under the same domain.
+Apps must include
+- @angular/common
+- @angular/core
+- @angular/material
+- @angular/cdk
+- @angular/flex-layout
+- @ng-idle/core
+- @ng-idle/keepalive
+
+# Classes
+## User
+- Returned after successful login to a parent app
+- Amongst other things, it holds the authentication token
+
+## MessageData
+- Describes the data that is passed between parent and child windows with the WindowManagerService
+
+# Components
+## AlertComponent
+- Simple 1, 2, or 3 button alert/confirmation dialog, based on MatDialog
+- IAlert defines the data
+
+## InactivityComponent
+- Count-down alert popup, based on MatDialog
+- Used exclusively by InactivityManagerService
+
+# Services
+## AppService
+The AppService should be initialized by the application's main app.module to set up the API root and application version number. You can then use this service to get...
+- the API root
+- the application version number
+- the server-type we're running on (prod / dev / localhost)
+
+## AuthService
+The AuthService is used to
+- Set Authorization headers for HTTP requests
+- Update the token information stored in the session storage
+- Determine if the user has a token
+- Determine if the user has a is logged in with a valid token (i.e. the token has not expired)
+
+## RunModeService
+The RunModeService is used to determine if the application is running as its own application, or if it is running as the child of another application
+
+## TokenManagerService
+Use the TokenManagerService to maintain a token
+- Tokens expire every 60 minutes on the Java server
+- This service refreshes tokens at 20 minute intervals to ensure it never expires (The 20 minute interval matches the inactivity timeout interval)
+- Tokens are only maintained (updated) when the app is running in standalone mode (Child windows always use the token from the parent window)
+
+## ToolsService
+The ToolsService is used to display generic alerts or application error alerts. It can also be used to handle subscriber errors to return a default value
+
+## StorageManagerService
+The StorageManagerService is a simple web storage manager to work with multiple apps under the same domain.
 - The manager will use local / session storage if available.
 - Otherwise, it will revert to using cookies.
 
-### Information
-- Items that are common across applications are prefixed with '/sis/', otherwise, they are prefixed with '/BASE_HREF/'.
-- When using local / session storage, items set to expire use sessionStorage, otherwise, localStorage is used.
-- In the case of cookies, items set to persist are appended with '/!' to signify a non-session cookie.
-
-### Usage
-- StorageManagerService is provided in root, so simply inject where required.
-
-#### get(key: string): string 
-- Returns the object stored at the given key
-
-#### set(key: string, val: string | number | boolean | object | Array<any>, expires: boolean = true, common: boolean = false): boolean
-- Sets the object by storing it in local or session storage (or to a cookie)
-
-#### remove(key: string, track: boolean = true)
-- Removes an item from either the local or session storage (or from a cookie)
-
-#### removeAll(force: boolean = true)
-- Removes all session storage items either for the app only, or for the '/common/' items as well
-
-# WindowManagerService
-- A simple manager to open/close windows and handle communication between parent/child windows
-
-### Usage
-- WindowManagerService is provided in root, so simply inject where required.
-
-### get parentWindow()
-- Returns a reference to the parent window.
-
-### get thisWindow()
-- Returns a reference to the current window.
-
-### open(url: string, name: string)
-- Opens a child window.
-
-### close(name: string)
-- Closes a child window.
-
-### closeAll()
-- Closes all child windows.
-
-### postToChild(name: string, message: any, targetOrigin: string = '*')
-- Posts a message from the parent to a child window.
-
-### postToParent(message: any, targetOrigin: string = '*')
-- Posts a message from a child to the parent window.
+## WindowManagerService
+The WindowManagerService is a simple manager to open/close windows and handle communication between parent/child windows

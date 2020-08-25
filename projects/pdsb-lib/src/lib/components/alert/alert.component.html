@@ -1,0 +1,34 @@
+<div mat-dialog-title>
+    <span class="f++ mr">{{ title }}</span>
+</div>
+
+<div mat-dialog-content [innerHTML]="message"></div>
+
+<div 
+    mat-dialog-actions 
+    fxLayout="row"
+    fxLayoutAlign="center center"
+>
+    <button 
+        mat-raised-button
+        [mat-dialog-close]="btn1"
+    >
+        <span>{{ buttonText1 }}</span>
+    </button>
+    <button 
+        *ngIf="showButton2"
+        mat-raised-button 
+        class="ml+"
+        [mat-dialog-close]="btn2"
+    >
+        <span>{{ buttonText2 }}</span>
+    </button>
+    <button
+        *ngIf="showButton3"
+        mat-raised-button
+        class="ml++++"
+        [mat-dialog-close]="btn3"
+    >
+        <span>{{ buttonText3 }}</span>
+    </button>
+</div>

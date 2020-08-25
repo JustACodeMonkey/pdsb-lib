@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/pdsb-lib",
       "sourceRoot": "projects/pdsb-lib/src",
-      "prefix": "lib",
+      "prefix": "pdsb",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -42,9 +42,15 @@
           }
         }
       }
-    }},
+    }
+  },
   "cli": {
     "analytics": "52336cf4-ce0d-44f9-a900-ec6ce187ba57"
   },
-  "defaultProject": "pdsb-lib"
+  "defaultProject": "pdsb-lib",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

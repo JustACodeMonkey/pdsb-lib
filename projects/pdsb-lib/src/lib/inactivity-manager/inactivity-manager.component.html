@@ -1,0 +1,34 @@
+<div mat-dialog-title>
+    <span class="f++ mr">Continue session?</span>
+</div>
+
+<div mat-dialog-content>
+    <p>Your session has been inactive for {{ inactiveDisplay }}.</p>
+    <p>
+        To continue your session, click the "Continue session" button.<br/>
+        To logout, click the "Logout" button.
+    </p>
+    <p>If you do not respond, you will be automatically logged off in {{ timeoutDisplay }}.</p>
+</div>
+
+<div 
+    mat-dialog-actions 
+    fxLayout="row"
+    fxLayoutAlign="center center"
+>
+    <!-- Button to continue the session ... returns null to the afterClosed subscription -->
+    <button 
+        mat-raised-button 
+        mat-dialog-close 
+        class="mr+"
+    >
+        <span>Continue session</span>
+    </button>
+    <!-- Button to logout ... returns "logout" to the afterClosed subscription -->
+    <button 
+        mat-raised-button 
+        mat-dialog-close="logout"
+    >
+        <span>Logout</span>
+    </button>
+</div>
