@@ -27,6 +27,10 @@ Apps must include
 - Count-down alert popup, based on MatDialog
 - Used exclusively by InactivityManagerService
 
+## PrintManagerComponent
+- The MatDialog to initialize and monitor printing to an Oracle print server
+- IPrintManagerData defines the data
+
 # Services
 ## AppService
 The AppService should be initialized by the application's main app.module to set up the API root and application version number. You can then use this service to get...
@@ -41,8 +45,18 @@ The AuthService is used to
 - Determine if the user has a token
 - Determine if the user has a is logged in with a valid token (i.e. the token has not expired)
 
+## PrintManagerService
+The PrintManagerService works with PrintManagerComponent to handle printing to an Oracle print server
+- RxJS Subjects are used to communicate between the PrintManagerComponent and page/component that is
+  requesting the print
+
 ## RunModeService
 The RunModeService is used to determine if the application is running as its own application, or if it is running as the child of another application
+
+## StorageManagerService
+The StorageManagerService is a simple web storage manager to work with multiple apps under the same domain.
+- The manager will use local / session storage if available.
+- Otherwise, it will revert to using cookies.
 
 ## TokenManagerService
 Use the TokenManagerService to maintain a token
@@ -52,11 +66,6 @@ Use the TokenManagerService to maintain a token
 
 ## ToolsService
 The ToolsService is used to display generic alerts or application error alerts. It can also be used to handle subscriber errors to return a default value
-
-## StorageManagerService
-The StorageManagerService is a simple web storage manager to work with multiple apps under the same domain.
-- The manager will use local / session storage if available.
-- Otherwise, it will revert to using cookies.
 
 ## WindowManagerService
 The WindowManagerService is a simple manager to open/close windows and handle communication between parent/child windows

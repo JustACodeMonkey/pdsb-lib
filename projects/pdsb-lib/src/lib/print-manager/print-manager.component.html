@@ -1,0 +1,53 @@
+<div mat-dialog-title>
+    <span class="f++ mr">{{ title }}</span>
+</div>
+<div mat-dialog-content>
+    <div *ngIf="!readyToOpen && !errorOrFailed">
+        <p>The report is being generated. You will be notified when it is complete. Depending on the report requested, this could take up to a minute.</p>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </div>
+    <p *ngIf="msg !== ''">{{ msg }}</p>
+    <p *ngIf="waitTime > 0">
+        <span *ngIf="waitTime > 10">Still working on it.</span> You've been waiting for {{ waitTime }} second{{ waitTime > 1 ? 's' : ''}}.
+    </p>
+</div>
+<div mat-dialog-actions fxLayoutAlign="center center">
+    <!-- OPEN REPORT -->
+    <button
+        *ngIf="readyToOpen"
+        mat-raised-button
+        (click)="onOpenReport()"
+        class="mr+"
+    >
+        <mat-icon>open_in_new</mat-icon> Open report
+    </button>
+    
+    <!-- RETRY -->
+    <button 
+        *ngIf="errorOrFailed"
+        mat-raised-button
+        (click)="onTryAgain()"
+        class="mr+"
+    >
+        <mat-icon>replay</mat-icon> Try Again
+    </button>
+
+    <!-- CLOSE -->
+    <button 
+        *ngIf="readyToOpen || errorOrFailed"
+        mat-raised-button
+        (click)="onClose()"
+    >
+        <mat-icon>close</mat-icon> Close
+    </button>
+
+    <!-- ABORT -->
+    <button 
+        *ngIf="!readyToOpen && !errorOrFailed"
+        mat-raised-button
+        (click)="onClose()"
+    >
+        <mat-icon>close</mat-icon> Abort
+    </button>
+</div>
+    

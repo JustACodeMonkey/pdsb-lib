@@ -81,15 +81,21 @@ export class AuthService {
 
     /**
      * Updates the user stored in session storage
+     * @param u The updated User object to store
      */
-    updateUser(u: User) {
-        const user  = this.getUser();
-        user.status = u.status;
-        user.token  = user.status === User.STATUS_LOGGED_IN ? u.token : '';
+    updateUser(u?: User) {
         if (this._rm.isStandalone) {
-            this._storage.set(this.USER_STORE, user, true, true);
-            this._storage.set(this.USER_UPDATED_AT, (new Date()).getTime());
-        } 
+            if (u) {
+                const user  = this.getUser();
+                user.status = u.status;
+                user.token  = user.status === User.STATUS_LOGGED_IN ? u.token : '';
+                this._storage.set(this.USER_STORE, user, true, true);
+                this._storage.set(this.USER_UPDATED_AT, (new Date()).getTime());
+            } else {
+                this._storage.remove(this.USER_STORE);
+                this._storage.remove(this.USER_UPDATED_AT);
+            }
+        }
     }
 
     private getUser() {

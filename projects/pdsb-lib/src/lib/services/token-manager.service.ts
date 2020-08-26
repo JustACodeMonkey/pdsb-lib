@@ -1,4 +1,4 @@
-import { Injectable, RendererFactory2, Inject } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, interval, Subject } from 'rxjs';
 import { RunModeService } from './run-mode.service';
