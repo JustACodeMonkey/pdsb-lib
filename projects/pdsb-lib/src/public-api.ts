@@ -12,6 +12,7 @@ export * from './lib/print-manager/print-manager.component';
 // Services
 export * from './lib/services/app.service';
 export * from './lib/services/auth.service';
+export * from './lib/inactivity-manager/inactivity-manager.service';
 export * from './lib/services/run-mode.service';
 export * from './lib/services/token-manager.service';
 export * from './lib/services/tools.service'
