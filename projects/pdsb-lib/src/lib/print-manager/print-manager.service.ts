@@ -27,7 +27,7 @@ import { ToolsService } from '../services/tools.service';
  */
 export class PrintManagerService {
 
-    private readonly api = '/angularprintapi/';
+    private readonly api = '/angularprintapi/ws/';
 
     private _dialogReady: Subject<null>      = new Subject<null>();
     private _dataReady: Subject<PrintParams> = new Subject<PrintParams>();
