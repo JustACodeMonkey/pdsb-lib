@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,6 +9,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AlertComponent } from './components/alert/alert.component';
 import { InactivityManagerComponent } from './inactivity-manager/inactivity-manager.component';
 import { PrintManagerComponent } from './print-manager/print-manager.component';
+import { PdsbLibConfig } from './classes/pdsb-lib-config';
 
 @NgModule({
     declarations: [
@@ -33,4 +34,18 @@ import { PrintManagerComponent } from './print-manager/print-manager.component';
         PrintManagerComponent
     ]
 })
-export class PdsbLibModule { }
+export class PdsbLibModule {
+    static forRoot (
+        pdsbLibConfig: PdsbLibConfig
+    ): ModuleWithProviders<PdsbLibModule> {
+        return {
+            ngModule: PdsbLibModule,
+            providers: [
+                {
+                    provide: PdsbLibConfig,
+                    useValue: pdsbLibConfig
+                }
+            ]
+        }
+    }
+}

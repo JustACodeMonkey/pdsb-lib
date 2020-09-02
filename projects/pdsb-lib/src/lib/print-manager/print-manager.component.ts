@@ -144,6 +144,7 @@ export class PrintManagerComponent implements OnInit, OnDestroy {
      * Starts the interval to check to see if the Oracle print server is done with the report
      */
     private startInterval() {
+        this.stopInterval();
         this._interval = interval(3000).subscribe({
             next: (i: number) => {
                 if (this._rechecking) {
@@ -154,6 +155,7 @@ export class PrintManagerComponent implements OnInit, OnDestroy {
                     .checkJob(this._printStatus.jobId, this._printStatus.server)
                     .subscribe({
                         next: (printStatus: PrintStatus) => {
+                            console.log(printStatus);
                             const status = printStatus.status;
                             if (status === PrintStatus.STATUS_FAILED || status >= PrintStatus.STATUS_ERROR) {
                                 this.onReportError();

@@ -1,6 +1,6 @@
 {
   "name": "pdsb-lib",
-  "version": "10.0.4",
+  "version": "10.0.8",
   "description": "This library contains components and services to support SIS Angular applications at the Peel District School Board.",
   "license": "MIT",
   "repository": {
@@ -13,9 +13,9 @@
     "@angular/core": ">=10.0.0 || >=11.0.0",
     "@angular/material": ">=10.0.0 || >=11.0.0",
     "@angular/cdk": ">=10.0.0 || >=11.0.0",
-    "@angular/flex-layout": ">=10.0.0 || >=11.0.0",
-    "@ng-idle/core": ">=9.0.0 || >=10.0.0",
-    "@ng-idle/keepalive": ">=9.0.0 || >=10.0.0"
+    "@angular/flex-layout": ">=10.0.0-beta.32 || >=11.0.0",
+    "@ng-idle/core": ">=9.0.0-beta.1 || >=10.0.0",
+    "@ng-idle/keepalive": ">=9.0.0-beta.1 || >=10.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"

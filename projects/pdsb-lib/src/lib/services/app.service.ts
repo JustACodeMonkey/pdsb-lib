@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { PdsbLibConfig } from '../classes/pdsb-lib-config';
 
 /** @dynamic */
 @Injectable({
@@ -17,12 +18,11 @@ export class AppService {
     private _version = '';
 
     constructor(
+        private _config: PdsbLibConfig,
         @Inject(DOCUMENT) private _doc: Document
-    ) { }
-
-    init(apiRoot: string, version: string) {
-        this._apiRoot = apiRoot;
-        this._version = version;
+    ) {
+        this._apiRoot = this._config.apiRoot;
+        this._version = this._config.version;
     }
 
     get apiRoot() {
@@ -34,8 +34,8 @@ export class AppService {
 
     get isProd() {
         const href = this.href();
-        return href.indexOf('gweb11') > -1
-            || href.indexOf('ssp-');
+        return href.indexOf('://gweb11') > -1
+            || href.indexOf('://ssp-') > -1;
     }
 
     get isNotProd() {
@@ -44,14 +44,14 @@ export class AppService {
 
     get isDev() {
         const href = this.href();
-        return href.indexOf('devweb2') > -1
-            || href.indexOf('dev-sspweb');
+        return href.indexOf('://devweb2') > -1
+            || href.indexOf('://dev-sspweb') > -1;
     }
 
     get isLocalHost() {
         const href = this.href();
-        return href.indexOf('localhost') > -1
-            || href.indexOf(':4200');
+        return href.indexOf('://localhost') > -1
+            || href.indexOf(':4200') > -1;
     }
 
     private href() {
