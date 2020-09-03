@@ -4,6 +4,11 @@ import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { MatDialog } from '@angular/material/dialog';
 import { InactivityManagerComponent } from './inactivity-manager.component';
 
+/**
+ * Use the InactivityManagerService to ensure the user has not left their session inactive for too long
+ * - When the session time has passed, an alert is shown
+ * - After the alert time passes, the user is logged out
+ */
 @Injectable({
     providedIn: 'root'
 })

@@ -7,9 +7,6 @@ import { PrintStatus } from './print-status';
 import { PrintServer } from './print-server';
 import { ToolsService } from '../services/tools.service';
 
-@Injectable({
-    providedIn: 'root'
-})
 /**
  * Use the PrintManagerService to start / setup / monitor a print to the Oracle print servers
  * 1. Start by opening PrintManagerComponent from the page
@@ -25,6 +22,9 @@ import { ToolsService } from '../services/tools.service';
  *    to tell the PrintManagerComponent to start monitoring the Oracle print server to see if the
  *    requeseted report is ready to be opened
  */
+@Injectable({
+    providedIn: 'root'
+})
 export class PrintManagerService {
 
     private readonly api = '/angularprintapi/ws/';

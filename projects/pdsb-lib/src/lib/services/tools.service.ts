@@ -5,13 +5,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { IAlert } from '../components/alert/i-alert';
 import { Subscriber } from 'rxjs';
 
-@Injectable({
-    providedIn: 'root'
-})
 /**
  * The ToolsService is used to display generic alerts or application error alerts.
  * It can also be used to handle subscriber errors to return a default value
  */
+@Injectable({
+    providedIn: 'root'
+})
 export class ToolsService {
 
     /**
@@ -19,6 +19,8 @@ export class ToolsService {
      */
     private _appErrorTitle = 'Application error';
     private _appErrorMsg   = 'The application server is currently unavailable.';
+    private _appDownMsg    = 'The application is currently down.';
+    private _appVersionMsg = 'The appliation version is incorrect. The page will refresh when you click OK.';
 
     constructor(
         private _dialog: MatDialog
@@ -43,6 +45,14 @@ export class ToolsService {
         this._appErrorMsg = msg;
     }
 
+    get appDownMsg() {
+        return this._appDownMsg;
+    }
+
+    get appVersionMsg() {
+        return this._appVersionMsg;
+    }
+
     /**
      * Generic error message
      * @param title - The title to display
@@ -51,7 +61,7 @@ export class ToolsService {
      */
     genericError(title: string, msg: string, error?: HttpErrorResponse) {
         const content = msg + (error ? `<p>${error.message}</p>` : '');
-        this._dialog.open(AlertComponent, {
+        return this._dialog.open(AlertComponent, {
             data: {
                 title,
                 message: content
@@ -64,7 +74,7 @@ export class ToolsService {
      * Displays an error using a MatDialog
      */
     onAppError(error: HttpErrorResponse) {
-        this.genericError(this._appErrorTitle, this._appErrorMsg, error);
+        return this.genericError(this._appErrorTitle, this._appErrorMsg, error);
     }
 
     /**

@@ -1,6 +1,9 @@
 import { Item } from './item';
 import { DocRef } from './doc-ref';
 
+/**
+ * Common code made available to the Cookie and Session managers
+ */
 export class ManagerBase {
 
     private readonly BASE: string;      // The base URL for the app

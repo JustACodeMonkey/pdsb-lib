@@ -4,9 +4,6 @@ import { HttpHeaders } from '@angular/common/http';
 import { StorageManagerService } from '../storage-manager/storage-manager.service';
 import { User } from '../classes/user';
 
-@Injectable({
-    providedIn: 'root'
-})
 /**
  * The AuthService is used to
  * 1. Set Authorization headers for HTTP requests
@@ -14,6 +11,9 @@ import { User } from '../classes/user';
  * 3. Determine if the user has a token
  * 4. Determine if the user has a is logged in with a valid token (has not expired)
  */
+@Injectable({
+    providedIn: 'root'
+})
 export class AuthService {
 
     /**

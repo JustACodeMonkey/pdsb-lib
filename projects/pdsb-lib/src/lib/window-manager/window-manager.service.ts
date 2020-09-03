@@ -3,7 +3,11 @@ import { Subject } from 'rxjs';
 import { MessageData } from './message-data';
 import { DOCUMENT } from '@angular/common';
 
-/** @dynamic */
+/** @dynamic =
+ * Use the WindowManagerSerivce to pass messages between windows and to open child windows
+ * - When child windows are opened this way, logging out of the application will automatically
+ *   close those children
+ */
 @Injectable({
     providedIn: 'root'
 })

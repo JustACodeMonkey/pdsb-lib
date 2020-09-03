@@ -7,7 +7,13 @@ import { StorageManager } from './storage-manager';
 import { DocRef } from './doc-ref';
 import { WinRef } from './win-ref';
 
-/** @dynamic */
+/** @dynamic
+ * Use the StorageManagerService to get/set session variables
+ * - Depending on the browser capabilities, either sessionStorage/localStorage or cookies are used
+ * - Application theme is always stored as a cookie
+ * - Application specific variables are stored under /appName/variableName
+ * - Common variables are stored under /sis/variableName
+ */
 @Injectable({
     providedIn: 'root'
 })

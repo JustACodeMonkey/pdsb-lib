@@ -2,16 +2,15 @@ import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { PdsbLibConfig } from '../classes/pdsb-lib-config';
 
-/** @dynamic */
-@Injectable({
-    providedIn: 'root'
-})
-/**
+/** @dynamic
  * Use the AppService to get
  * 1. the API root
  * 2. the application version number
  * 3. the server-type we're running on (prod / dev / localhost)
  */
+@Injectable({
+    providedIn: 'root'
+})
 export class AppService {
 
     private _apiRoot = '';
@@ -52,6 +51,13 @@ export class AppService {
         const href = this.href();
         return href.indexOf('://localhost') > -1
             || href.indexOf(':4200') > -1;
+    }
+
+    /**
+     * Forces the window to refresh
+     */
+    forceRefresh() {
+        this._doc.location.reload(true);
     }
 
     private href() {

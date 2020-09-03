@@ -8,7 +8,11 @@ import { PrintParams } from './print-params';
 import { AppService } from '../services/app.service';
 import { IPrintManagerData } from './i-print-manager-data';
 
-/** @dynamic */
+/** @dynamic
+ * The print button in the application should open PrintManagerComponent.
+ * Your application should subscribe to the dialogReady Subject in PrintManagerService
+ * and call dataSetupComplete with the required PrintParams when the setup is complete.
+ */
 @Component({
     selector: 'pdsb-print-manager',
     templateUrl: './print-manager.component.html',

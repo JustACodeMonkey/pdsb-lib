@@ -22,11 +22,7 @@ enum VisibilityStateName {
     MS      = 'msHidden'
 }
 
-/** @dynamic */
-@Injectable({
-    providedIn: 'root'
-})
-/**
+/** @dynamic 
  * Use the TokenManagerService to maintain a token
  * - Tokens expire every 60 minutes on the Java server
  * - This service refreshes tokens at 20 minute intervals to ensure it never expires
@@ -34,6 +30,9 @@ enum VisibilityStateName {
  * - Tokens are only maintained (updated) when the app is running in standalone mode
  *   (Child windows always use the token from the parent window)
  */
+@Injectable({
+    providedIn: 'root'
+})
 export class TokenManagerService {
 
     private _interval: Observable<number>;
