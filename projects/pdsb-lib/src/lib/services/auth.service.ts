@@ -8,6 +8,15 @@ import { ToolsService } from './tools.service';
 import { Subject, Observable } from 'rxjs';
 import { IBasicUserInfo } from '../interfaces/i-basic-user-info';
 
+class Header {
+    name  = '';
+    value = '';
+
+    constructor(name: string, value: string) {
+        this.name  = name;
+        this.value = value;
+    }
+}
 /**
  * The AuthService is used to
  * 1. Set Authorization headers for HTTP requests
@@ -30,7 +39,9 @@ export class AuthService {
     
     readonly TOKEN_MAX_TIME  = 1000 * 60 * 45; // Max 45 minutes
 
+    private _headers: Header[] = [];
     private _userSelected: Subject<IBasicUserInfo> = new Subject<IBasicUserInfo>();
+    private _loggedOut: Subject<null>              = new Subject<null>();
 
     constructor(
         private _as: AppService,
@@ -44,14 +55,18 @@ export class AuthService {
      * Returns the headers for authorization used for HTTP requests
      */
     get headers() {
-        const user = this.getUser();
-        return {
-            headers: new HttpHeaders()
-                .set('Authorization', 'Bearer ' + (user ? user.token : ''))
-                .set('Cache-Control', 'no-cache')
-                .set('Pragma', 'no-cache')
-                .set('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT')
-        };
+        // Default headers
+        const user  = this.getUser();
+        let headers = new HttpHeaders()
+            .set('Authorization', 'Bearer ' + (user ? user.token : ''))
+            .set('Cache-Control', 'no-cache')
+            .set('Pragma', 'no-cache')
+            .set('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
+        // Additional application specific headers
+        for (const header of this._headers) {
+            headers = headers.append(header.name, header.value);
+        }
+        return {headers};
     }
 
     /**
@@ -95,6 +110,44 @@ export class AuthService {
      */
     get userSelected() {
         return this._userSelected;
+    }
+
+    /**
+     * Returns the subject that emits when a user logs out
+     */
+    get loggedOut() {
+        return this._loggedOut;
+    }
+
+    /**
+     * Adds an extra header to include
+     * @param name The name of the header to add
+     * @param value The value of the header
+     */
+    addAppHeader(name: string, value: string) {
+        let found = false;
+        for (let i = 0; i < this._headers.length; i++) {
+            if (this._headers[i].name === name) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            this._headers.push(new Header(name, value));
+        }
+    }
+
+    /**
+     * Removes an extra header from the include list
+     * @param name The name of the header to remove
+     */
+    removeAppHeader(name: string) {
+        for (let i = 0; i < this._headers.length; i++) {
+            if (this._headers[i].name === name) {
+                this._headers.splice(i, 1);
+                break;
+            }
+        }
     }
 
     /**
@@ -144,14 +197,18 @@ export class AuthService {
                 )
                 .subscribe({
                     next: (user: IBasicUserInfo) => {
+                        this._headers = [];
                         this._storage.removeAll();
                         subscriber.next(user);
                         subscriber.complete();
+                        this._loggedOut.next();
                     },
                     error: error => {
+                        this._headers = [];
                         this._storage.removeAll();
                         subscriber.next(new User());
                         subscriber.complete();
+                        this._loggedOut.next();
                     }
                 })
         });
