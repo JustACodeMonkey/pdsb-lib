@@ -125,16 +125,8 @@ export class AuthService {
      * @param value The value of the header
      */
     addAppHeader(name: string, value: string) {
-        let found = false;
-        for (let i = 0; i < this._headers.length; i++) {
-            if (this._headers[i].name === name) {
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
-            this._headers.push(new Header(name, value));
-        }
+        this.removeAppHeader(name);
+        this._headers.push(new Header(name, value));
     }
 
     /**
@@ -198,14 +190,14 @@ export class AuthService {
                 .subscribe({
                     next: (user: IBasicUserInfo) => {
                         this._headers = [];
-                        this._storage.removeAll();
+                        this._storage.removeAll(true);
                         subscriber.next(user);
                         subscriber.complete();
                         this._loggedOut.next();
                     },
                     error: error => {
                         this._headers = [];
-                        this._storage.removeAll();
+                        this._storage.removeAll(true);
                         subscriber.next(new User());
                         subscriber.complete();
                         this._loggedOut.next();
