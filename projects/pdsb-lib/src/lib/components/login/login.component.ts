@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LoginService } from './login.service';
 import { User } from '../../classes/user';
 import { ToolsService } from '../../services/tools.service';
 import { AppService } from '../../services/app.service';
+import { AuthService } from '../../services/auth.service';
+import { IBasicUserInfo } from '../../interfaces/i-basic-user-info';
 
 /**
  * Add <pdsb-login> to your main login component/page to handle app login
@@ -37,8 +38,8 @@ export class LoginComponent implements OnInit {
     users: User[] = [];
 
     constructor(
-        private _ls: LoginService,
         private _as: AppService,
+        private _auth: AuthService,
         private _ts: ToolsService
     ) { }
 
@@ -47,10 +48,10 @@ export class LoginComponent implements OnInit {
 
     onLogin() {
         this.isLoggingIn = true;
-        this._ls
+        this._auth
             .login(this.user.username, this.user.password, this.urlPart)
             .subscribe({
-                next: (users: User[]) => {
+                next: (users: IBasicUserInfo[]) => {
                     // If no users are returned, the login attempt failed
                     // If 1 user is returned, set the user and continue
                     // If > 1 user is returned, display a selection for the user to pick which user
@@ -77,7 +78,7 @@ export class LoginComponent implements OnInit {
                         } else if (status === User.STATUS_LOGGED_IN) {
                             // If only a single account, select it, otherwise show account list
                             if (users.length === 1) {
-                                this._ls.selectUser(users[0]);
+                                this._auth.selectUser(users[0]);
                             } else if (users.length > 1) {
                                 this.users = users;
                             }
@@ -93,7 +94,7 @@ export class LoginComponent implements OnInit {
      * @param user The selected user
      */
     setUser(user: User) {
-        this._ls.selectUser(user);
+        this._auth.selectUser(user);
     }
 
     /**

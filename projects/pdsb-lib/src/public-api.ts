@@ -1,4 +1,5 @@
 // Interfaces
+export * from './lib/interfaces/i-basic-user-info';
 export * from './lib/components/alert/i-alert';
 export * from './lib/print-manager/i-print-manager-data';
 // Classes
