@@ -6,6 +6,7 @@ export * from './lib/print-manager/i-print-manager-data';
 export * from './lib/classes/pdsb-lib-config';
 export * from './lib/classes/user';
 export * from './lib/print-manager/print-params';
+export * from './lib/print-manager/print-status';
 export * from './lib/window-manager/message-data';
 // Components
 export * from './lib/components/alert/alert.component';
