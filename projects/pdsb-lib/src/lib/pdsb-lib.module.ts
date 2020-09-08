@@ -1,5 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
@@ -25,6 +26,7 @@ import { LoginComponent } from './components/login/login.component';
     ],
     imports: [
         CommonModule,
+        BrowserAnimationsModule,
         FormsModule,
         HttpClientModule,
         MatButtonModule,
@@ -39,7 +41,17 @@ import { LoginComponent } from './components/login/login.component';
         // Components
         AlertComponent,
         InactivityManagerComponent,
-        PrintManagerComponent
+        LoginComponent,
+        PrintManagerComponent,
+        // Material modules (so they are available to the app)
+        // Note that the app must import and set Material theming
+        MatButtonModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatProgressBarModule,
+        FlexLayoutModule
     ]
 })
 export class PdsbLibModule {

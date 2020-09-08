@@ -170,7 +170,7 @@ export class AuthService {
                         subscriber.next(users);
                         subscriber.complete();
                     },
-                    error: error => this._ts.onSubscriberError(error, subscriber, new User())
+                    error: error => this._ts.onSubscriberError(error, subscriber, [new User()])
                 });
         });
     }

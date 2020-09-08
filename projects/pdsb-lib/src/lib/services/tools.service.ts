@@ -54,7 +54,7 @@ export class ToolsService {
     }
 
     /**
-     * Generic error message
+     * Generic error message (single button message)
      * @param title - The title to display
      * @param msg - The message to display
      * @param error - Optional error object (with message property) to display
@@ -65,6 +65,49 @@ export class ToolsService {
             data: {
                 title,
                 message: content
+            } as IAlert,
+            disableClose: true
+        } as MatDialogConfig);
+    }
+
+    /**
+     * Displays a generic two-button confirm pop-up
+     * @param title - The title to display
+     * @param msg - The message to display
+     * @param btn1Text - The text for button 1 (default is OK)
+     * @param btn2Text - The text for button 2 (default is Cancel)
+     */
+    genericConfirm(title: string, msg: string, btn1Text: string = 'OK', btn2Text: string = 'Cancel') {
+        return this._dialog.open(AlertComponent, {
+            data: {
+                title,
+                message: msg,
+                buttonText1: btn1Text,
+                buttonText2: btn2Text,
+                showButton2: true
+            } as IAlert,
+            disableClose: true
+        } as MatDialogConfig);
+    }
+
+    /**
+     * Displays a three-button choice confirm box
+     * @param title - The title to display
+     * @param msg - The message to display
+     * @param btn1Text - The text for button 1 (default is OK)
+     * @param btn2Text - The text for button 2 (default is Cancel)
+     * @param btn3Text - The text for button 3 (default is Maybe)
+     */
+    genericChoice(title: string, msg: string, btn1Text: string = 'OK', btn2Text: string = 'Cancel', btn3Text: string = 'Maybe') {
+        return this._dialog.open(AlertComponent, {
+            data: {
+                title,
+                message: msg,
+                buttonText1: btn1Text,
+                buttonText2: btn2Text,
+                buttonText3: btn3Text,
+                showButton2: true,
+                showButton3: true
             } as IAlert,
             disableClose: true
         } as MatDialogConfig);

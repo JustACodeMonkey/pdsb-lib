@@ -12,6 +12,12 @@
     },
     {
       "path": "./projects/pdsb-lib/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/pdsb-lib-showcase/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/pdsb-lib-showcase/tsconfig.spec.json"
     }
 ]
 }
