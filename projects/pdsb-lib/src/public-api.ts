@@ -10,6 +10,7 @@ export * from './lib/print-manager/print-status';
 export * from './lib/window-manager/message-data';
 // Components
 export * from './lib/components/alert/alert.component';
+export * from './lib/components/html-loader/html-loader.component';
 export * from './lib/components/login/login.component';
 export * from './lib/inactivity-manager/inactivity-manager.component';
 export * from './lib/print-manager/print-manager.component';

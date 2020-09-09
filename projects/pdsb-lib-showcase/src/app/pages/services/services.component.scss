@@ -1,0 +1,45 @@
+::ng-deep pdsb-html-loader {
+    display: block;
+    padding-bottom: 36px;
+}
+::ng-deep pdsb-html-loader h1 {
+    background-color: rgba(255,255,255,.12);
+    color: #2196f3;
+    font-weight: normal;
+    margin: 9px 0;
+    padding: 9px;
+}
+::ng-deep pdsb-html-loader h3 {
+    color: #E91E63;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+::ng-deep pdsb-html-loader table {
+    border-collapse: collapse;
+    border-top: 1px solid rgba(255,255,255,.12);
+    padding: 0;
+    width: 100%;
+}
+::ng-deep pdsb-html-loader table > tbody > tr {
+    border-bottom: 1px solid rgba(255,255,255,.12);
+}
+::ng-deep pdsb-html-loader table > tbody > tr > td {
+    padding: 8px 0;
+    vertical-align: top;
+}
+::ng-deep pdsb-html-loader table > tbody > tr > td:nth-child(odd) {
+    font-style: italic;
+    min-width: 150px !important;
+    width: 150px !important;
+    max-width: 150px !important;
+    word-break: break-all;
+}
+::ng-deep pdsb-html-loader table > tbody > tr > td:nth-child(even) > span {
+    display: block;
+    color: #2196f3;
+    font-style: italic;
+}
+::ng-deep pdsb-html-loader table > tbody > tr > td:nth-child(even) {
+    padding-left: 8px;
+    width: 100%;
+}

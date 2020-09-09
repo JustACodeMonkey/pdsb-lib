@@ -1,0 +1,27 @@
+<div class="max-container">
+    <h1 name="top" class="mb0">Services <span class="f- opacity-50 normal">Note: all content is loaded with pdsb-html-loader</span></h1>
+    <!-- List -->
+    <ul class="mt">
+        <li *ngFor="let source of sources"
+            class="pv-"
+        >
+            <a (click)="scrollTo(source)" class="pointer">{{ source.title }}</a>
+        </li>
+    </ul>
+    <!-- Details -->
+    <div 
+        *ngFor="let source of sources"
+        class="position-relative"
+    >
+        <pdsb-html-loader [source]="source.url"></pdsb-html-loader>
+        <button
+            mat-button
+            (click)="scrollTop()"
+            class="position-absolute"
+            style="top:10px;right:0;"
+        >
+            <mat-icon>keyboard_arrow_up</mat-icon>
+            top
+        </button>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<h1 name="window-manager">WindowManagerService</h1>
+<p>
+    Use the WindowManagerSerivce to pass messages between windows and to open child windows.
+</p>
+<ul>
+    <li>When child windows are opened this way, logging out of the application will automatically close those children</li>
+</ul>
+<h3>Properties</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>parentWindow</td>
+            <td>Returns a reference to the parent window || null</td>
+        </tr>
+        <tr>
+            <td>thisWindow</td>
+            <td>Returns a reference to this window || null</td>
+        </tr>
+    </tbody>
+</table>
+<h3>Methods</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>open</td>
+            <td>
+                <span>(url: string, name: string): void</span>
+                Opens a window
+            </td>
+        </tr>
+        <tr>
+            <td>close</td>
+            <td>
+                <span>(name: string): void</span>
+                Closes a window
+            </td>
+        </tr>
+        <tr>
+            <td>closeAll</td>
+            <td>Closes all open windows</td>
+        </tr>
+        <tr>
+            <td>postToChild</td>
+            <td>
+                <span>(name: string, message: any, targetOrigin: string = '*'): void</span>
+                Posts a message to a child window
+            </td>
+        </tr>
+    </tbody>
+</table>

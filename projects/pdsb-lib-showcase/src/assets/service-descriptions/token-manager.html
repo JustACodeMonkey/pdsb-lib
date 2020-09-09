@@ -1,0 +1,32 @@
+<h1 name="token-manager">TokenManagerService</h1>
+<p>
+    Use the TokenManagerService to maintain a token.
+</p>
+<ul>
+    <li>Tokens expire every 60 minutes on the Java server</li>
+    <li>
+        This service refreshes tokens at 20 minute intervals to ensure it never expires
+        (The 20 minute interval matches the inactivity timeout interval)
+    </li>
+    <li>
+        Tokens are only maintained (updated) when the app is running in standalone mode
+        (Child windows always use the token from the parent window)
+    </li>
+</ul>
+<h3>Properties</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>tokenExpired</td>
+            <td>Returns the tokenExpired Subject. Subscribe to be notified when the token has expired.</td>
+        </tr>
+        <tr>
+            <td>appVersionChanged</td>
+            <td>Returns the appVersionChanged Subject. Subscribe to be notified when an app version change is detected when refreshing the token.</td>
+        </tr>
+        <tr>
+            <td>appHasGoneDown</td>
+            <td>Returns the appHasGoneDown Subject. Subscribe to be notified when an app down change is detected when refreshing the token.</td>
+        </tr>
+    </tbody>
+</table>

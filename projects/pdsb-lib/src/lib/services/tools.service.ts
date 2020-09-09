@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { AlertComponent } from '../components/alert/alert.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IAlert } from '../components/alert/i-alert';
@@ -59,7 +59,7 @@ export class ToolsService {
      * @param msg - The message to display
      * @param error - Optional error object (with message property) to display
      */
-    genericError(title: string, msg: string, error?: HttpErrorResponse) {
+    genericError(title: string, msg: string, error?: HttpErrorResponse): MatDialogRef<AlertComponent> {
         const content = msg + (error ? `<p>${error.message}</p>` : '');
         return this._dialog.open(AlertComponent, {
             data: {
@@ -77,7 +77,7 @@ export class ToolsService {
      * @param btn1Text - The text for button 1 (default is OK)
      * @param btn2Text - The text for button 2 (default is Cancel)
      */
-    genericConfirm(title: string, msg: string, btn1Text: string = 'OK', btn2Text: string = 'Cancel') {
+    genericConfirm(title: string, msg: string, btn1Text: string = 'OK', btn2Text: string = 'Cancel'): MatDialogRef<AlertComponent> {
         return this._dialog.open(AlertComponent, {
             data: {
                 title,
@@ -98,7 +98,7 @@ export class ToolsService {
      * @param btn2Text - The text for button 2 (default is Cancel)
      * @param btn3Text - The text for button 3 (default is Maybe)
      */
-    genericChoice(title: string, msg: string, btn1Text: string = 'OK', btn2Text: string = 'Cancel', btn3Text: string = 'Maybe') {
+    genericChoice(title: string, msg: string, btn1Text: string = 'OK', btn2Text: string = 'Cancel', btn3Text: string = 'Maybe'): MatDialogRef<AlertComponent> {
         return this._dialog.open(AlertComponent, {
             data: {
                 title,
@@ -116,7 +116,7 @@ export class ToolsService {
     /**
      * Displays an error using a MatDialog
      */
-    onAppError(error: HttpErrorResponse) {
+    onAppError(error: HttpErrorResponse): MatDialogRef<AlertComponent> {
         return this.genericError(this._appErrorTitle, this._appErrorMsg, error);
     }
 
@@ -126,11 +126,11 @@ export class ToolsService {
      * @param subscriber The subscriber (if any) to send the value to and complete
      * @param val The value to send in the subscriber
      */
-    onSubscriberError(error: HttpErrorResponse, subscriber?: Subscriber<any>, val?: any) {
-        this.onAppError(error);
+    onSubscriberError(error: HttpErrorResponse, subscriber?: Subscriber<any>, val?: any): MatDialogRef<AlertComponent> {
         if (subscriber) {
             subscriber.next(val);
             subscriber.complete();
         }
+        return this.onAppError(error);
     }
 }

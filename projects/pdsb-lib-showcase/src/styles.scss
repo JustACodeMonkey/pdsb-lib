@@ -11,7 +11,7 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$on-a-list-primary: mat-palette($mat-purple);
+$on-a-list-primary: mat-palette($mat-blue);
 $on-a-list-accent:  mat-palette($mat-pink);
 $on-a-list-warn:    mat-palette($mat-red);
 
@@ -32,6 +32,24 @@ $on-a-list-theme: mat-dark-theme((
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.max-container {
+    margin: 0 auto;
+    padding: 0 9px;
+    width: calc(100% - 18px);
+    min-width: 1004px;
+    max-width: 1280px;
+    position: relative;
+    text-align: left;
+}
+@media only screen and (max-width: 1024px) {
+    .max-container {
+        min-width: calc(100% - 18px);
+        max-width: calc(100% - 18px);
+        width: auto;
+        /* padding: 0 9px; */
+    }
+}
 
 /* *****************************************************************
  * WIDTH AND HEIGHT
@@ -281,7 +299,7 @@ strong,
 .horizontal-scroll	{display:-webkit-inline-box !important; overflow:auto !important;}
 .display-inline-block{display:inline-block !important;}
 
-.position-absolute	{position:absolute;}
+.position-absolute	{position:absolute !important;}
 .position-relative	{position:relative;}
 .position-fixed		{position:fixed;}
 

@@ -1,34 +1,27 @@
-<div style="text-align: center">
-    <h1>PDSB-LIB Showcase</h1>
-
-    <div style="display: inline-block;">
-        <button
-            mat-button
-            color="primary"
-            (click)="genericError()"
+<div class="header">
+    <div class="max-container">
+        <div
+            fxLayout="row"
+            fxLayoutAlign="space-between center"
         >
-            Generic error
-        </button>
-        
-        <button
-            mat-button
-            color="accent"
-            (click)="genericConfirm()"
-        >
-            Generic confirm
-        </button>
-        
-        <button
-            mat-button
-            color="warn"
-            (click)="genericChoice()"
-        >
-            Generic choice
-        </button>
+            <nav mat-tab-nav-bar>
+                <a  *ngFor="let page of pages"
+                    #rla="routerLinkActive"
+                    mat-tab-link
+                    routerLinkActive
+                    [routerLink]="page.url"
+                    [routerLinkActiveOptions]="{exact: false}"
+                    [active]="rla.isActive"
+                >
+                    {{ page.title | uppercase }}
+                </a>
+            </nav>
+            <span class="f+">{{ title }}</span>
+        </div>
     </div>
-    
-    <pdsb-login></pdsb-login>
+    <div class="position-absolute max-width" style="bottom: 0; border-bottom: 1px solid rgba(255, 255, 255, .12);"></div>
 </div>
 
-
-<router-outlet></router-outlet>
+<div class="content">
+    <router-outlet></router-outlet>
+</div>

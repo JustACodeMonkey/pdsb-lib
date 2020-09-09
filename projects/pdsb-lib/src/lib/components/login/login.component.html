@@ -7,8 +7,8 @@
         *ngIf="users.length === 0"
         #loginForm="ngForm"
     >
-        <div class="pv+++++ width-300">
-            <mat-form-field class="max-width" appearance="outline">
+        <div class="login-container">
+            <mat-form-field appearance="outline">
                 <mat-label>Peel Access ID</mat-label>
                 <input 
                     matInput 
@@ -20,7 +20,7 @@
                     [disabled]="isLoggingIn"
                 >
             </mat-form-field>
-            <mat-form-field class="max-width" appearance="outline">
+            <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
                 <input 
                     matInput 
@@ -33,10 +33,7 @@
                 >
             </mat-form-field>
 
-            <div
-                *ngIf="isLoggingIn"
-                class="max-width"
-                >
+            <div *ngIf="isLoggingIn">
                 <mat-progress-bar mode="indeterminate"></mat-progress-bar>
             </div>
 
@@ -44,7 +41,6 @@
                 *ngIf="!isLoggingIn"
                 mat-button 
                 color="primary"
-                class="max-width" 
                 type="submit"
                 (click)="onLogin()"
                 [disabled]="!user.username || !user.password"
@@ -58,14 +54,14 @@
     <!-- User selection -->
     <div 
         *ngIf="users.length > 1"
-        class="pv+++++" style="width:300px;"
+        class="login-container"
     >
         <p class="f+ m0 p0 pb">Select SIS account</p>
         <div 
             *ngFor="let user of users"
-            class="max-width pv-"
+            class="list"
         >
-            <button mat-raised-button class="max-width" (click)="setUser(user)">{{ user.name }}</button>
+            <button mat-raised-button (click)="setUser(user)">{{ user.displayName }}</button>
         </div>
     </div>
 </div>

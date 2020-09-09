@@ -1,0 +1,40 @@
+<h1 name="inactivity-manager">InactivityManagerService</h1>
+<p>
+    The InactivityManagerService is used to log a user out of the application after a set period of time.
+</p>
+<h3>Properties</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>inactiveTimeExceeded</td>
+            <td>Returns the inactiveTimeExceeded Subject. Subscribe to be notified when the inactive time is breached.</td>
+        </tr>
+        <tr>
+            <td>secondsUntilWarning</td>
+            <td>
+                <span>(s: number)</span>
+                Sets the number of seconds until the inactive warning is shown. (SET ONLY)
+            </td>
+        </tr>
+        <tr>
+            <td>secondsToWarn</td>
+            <td>
+                <span>(s: number)</span>
+                Sets the number of seconds to display the warning. (SET ONLY)
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h3>Methods</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>start</td>
+            <td>Starts the inactivity monitor</td>
+        </tr>
+        <tr>
+            <td>stop</td>
+            <td>Stops the inactivity monitor</td>
+        </tr>
+    </tbody>
+</table>

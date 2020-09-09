@@ -12,13 +12,14 @@
     <button 
         mat-raised-button
         [mat-dialog-close]="btn1"
+        class="mh"
     >
         <span>{{ buttonText1 }}</span>
     </button>
     <button 
         *ngIf="showButton2"
         mat-raised-button 
-        class="ml+"
+        class="mh"
         [mat-dialog-close]="btn2"
     >
         <span>{{ buttonText2 }}</span>
@@ -26,7 +27,7 @@
     <button
         *ngIf="showButton3"
         mat-raised-button
-        class="ml++++"
+        class="mh"
         [mat-dialog-close]="btn3"
     >
         <span>{{ buttonText3 }}</span>

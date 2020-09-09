@@ -1,0 +1,34 @@
+<div class="max-container">
+    <h1>AlertComponent</h1>
+    <p>
+        The AlertComponent can be used to show dialog boxes with 1, 2, or 3 button options.
+        For convenience, you can create these alerts with the ToolService using the genericError,
+        genericConfirm, and genericChoice methods respectively.
+    </p>
+    <button
+        mat-button
+        color="primary"
+        (click)="genericError()"
+    >
+        Generic error
+    </button><br>
+    <button
+        mat-button
+        color="primary"
+        (click)="genericConfirm()"
+    >
+        Generic confirm
+    </button><br>
+    <button
+        mat-button
+        color="primary"
+        (click)="genericChoice()"
+    >
+        Generic choice
+    </button>
+</div>
+
+
+
+
+

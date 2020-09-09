@@ -15,11 +15,13 @@ import { InactivityManagerComponent } from './inactivity-manager/inactivity-mana
 import { PrintManagerComponent } from './print-manager/print-manager.component';
 import { PdsbLibConfig } from './classes/pdsb-lib-config';
 import { LoginComponent } from './components/login/login.component';
+import { HtmlLoaderComponent } from './components/html-loader/html-loader.component';
 
 @NgModule({
     declarations: [
         // Components
         AlertComponent,
+        HtmlLoaderComponent,
         InactivityManagerComponent,
         PrintManagerComponent,
         LoginComponent
@@ -40,6 +42,7 @@ import { LoginComponent } from './components/login/login.component';
     exports: [
         // Components
         AlertComponent,
+        HtmlLoaderComponent,
         InactivityManagerComponent,
         LoginComponent,
         PrintManagerComponent,

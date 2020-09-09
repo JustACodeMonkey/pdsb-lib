@@ -1,0 +1,80 @@
+<h1 name="auth">AuthService</h1>
+<p>
+    The AuthService is used to log in, store and fetch the token, and set HTTP headers.
+</p>
+<h3>Properties</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>headers</td>
+            <td>Returns the HTTP headers with authorization token + any additional required application headers</td>
+        </tr>
+        <tr>
+            <td>hasToken</td>
+            <td>Returns true when the user has a valid token</td>
+        </tr>
+        <tr>
+            <td>isLoggedIn</td>
+            <td>Returns true when the user is logged in</td>
+        </tr>
+        <tr>
+            <td>tokenTimeValid</td>
+            <td>Returns true when token's last updated time is valid</td>
+        </tr>
+        <tr>
+            <td>isLoggedInAndValidTime</td>
+            <td>Returns true token time is valid AND the user is logged in</td>
+        </tr>
+        <tr>
+            <td>userSelected</td>
+            <td>Returns the userSelected Subject - Subscribe to be notified when a user logs in and selects a user account</td>
+        </tr>
+        <tr>
+            <td>loggedOut</td>
+            <td>Returns the loggedOut Subject - Subscribe to be notified when a user logs out</td>
+        </tr>
+    </tbody>
+</table>
+<h3>Methods</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>addAppHeader</td>
+            <td>Adds a required application header to be added to HTTP requests</td>
+        </tr>
+        <tr>
+            <td>removeAppHeader</td>
+            <td>Removes an app header</td>
+        </tr>
+        <tr>
+            <td>login</td>
+            <td>
+                <span>(username: string, password: string, urlPart: string = ''): Observable&lt;IBasicUserInfo[]&gt;</span>
+                Attempts to login and returns a list of IBasicUserInfo
+            </td>
+        </tr>
+        <tr>
+            <td>logout</td>
+            <td>
+                <span>(loginId: number, urlPart: string = ''): Observable&lt;IBasicUserInfo[]&gt;</span>
+                Logs out and returns a new IBasicUserInfo
+            </td>
+        </tr>
+        <tr>
+            <td>selectUser</td>
+            <td>
+                <span>(user: IBasicUserInfo)</span>
+                Stores the selected user information<br>
+                Outputs the .next() event on the userSelected Subject
+            </td>
+        </tr>
+        <tr>
+            <td>updateUser</td>
+            <td>
+                <span>u?: IBasicUserInfo</span>
+                Updates the stored user information
+
+            </td>
+        </tr>
+    </tbody>
+</table>

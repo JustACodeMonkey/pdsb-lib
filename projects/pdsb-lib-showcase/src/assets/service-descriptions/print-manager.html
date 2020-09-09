@@ -1,0 +1,51 @@
+<h1 name="print-manager">PrintManagerService</h1>
+<p>
+    The PrintManagerService is initiated by the Print button within the application.
+</p>
+<ol>
+    <li>Start by opening PrintManagerComponent from the page
+        <pre>
+_dialog.open(PrintManagerComponent, {
+    data: {
+        reportId: 'THE_ORACLE_REPORT_ID'
+    } as IPrintManagerData
+});
+        </pre>
+    </li>
+    <li>
+        Subscribe to the dialogReady Subject to let you know when the dialog is ready, 
+        so you can start any data setup steps that are required (like generating the
+        required temp table data, etc.)
+    </li>
+    <li>
+        Call dataSetupComplete(printParams: PrintParams) when the data setup has completed
+        to tell the PrintManagerComponent to start monitoring the Oracle print server to see if the
+        requeseted report is ready to be opened
+    </li>
+</ol>
+<h3>Properties</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>dialogReady</td>
+            <td>
+                Returns the dialogReady Subject.
+                Subscribe to be notified when the dialog is ready.
+                The parent application should do any required data setup at this point, 
+                then call the <i>dataSetupComplete</i> method.
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h3>Methods</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>dataSetupComplete</td>
+            <td>
+                <span>(params: PrintParams)</span>
+                Called by the parent application when the required data setup steps are complete.
+            </td>
+        </tr>
+    </tbody>
+</table>

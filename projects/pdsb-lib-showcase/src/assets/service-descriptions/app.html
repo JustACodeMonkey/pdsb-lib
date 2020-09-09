@@ -1,0 +1,43 @@
+<h1 name="app">AppService</h1>
+<p>
+    The AppService is configured with the required configuration settings from the PdsbLibModule.
+    These settings are used to get the initial application version and api root.
+</p>
+<h3>Properties</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>apiRoot</td>
+            <td>Returns the API root for the application (typically Angular app name with 'api' appended to the end)</td>
+        </tr>
+        <tr>
+            <td>version</td>
+            <td>Returns the application version number</td>
+        </tr>
+        <tr>
+            <td>isProd</td>
+            <td>Returns true when running on a production server (gweb11 or ssp-)</td>
+        </tr>
+        <tr>
+            <td>isNotProd</td>
+            <td>Returns true when isProd is false</td>
+        </tr>
+        <tr>
+            <td>isDev</td>
+            <td>Returns true when running on a dev server (devweb2 or dev-)</td>
+        </tr>
+        <tr>
+            <td>isLocalHost</td>
+            <td>Returns true when running on localhost or an IP address with port 4200</td>
+        </tr>
+    </tbody>
+</table>
+<h3>Methods</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>forceRefresh</td>
+            <td>Method to force reload the page</td>
+        </tr>
+    </tbody>
+</table>

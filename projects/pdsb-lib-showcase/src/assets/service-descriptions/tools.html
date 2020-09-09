@@ -1,0 +1,66 @@
+<h1 name="tools">ToolsService</h1>
+<p>
+    Use the ToolsService to display generic alerts, application error alerts, and subscriber errors.
+    Subscriber errors can return a default value.
+</p>
+<h3>Properties</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>appErrorTitle</td>
+            <td>Get/Set the generic app error pop-up title</td>
+        </tr>
+        <tr>
+            <td>appErrorMsg</td>
+            <td>Get/Set the generic app error pop-up message</td>
+        </tr>
+        <tr>
+            <td>appDownMsg</td>
+            <td>Get the app down message (GET ONLY)</td>
+        </tr>
+        <tr>
+            <td>appVersionMsg</td>
+            <td>Get the app version error message (GET ONLY)</td>
+        </tr>
+    </tbody>
+</table>
+<h3>Methods</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>genericError</td>
+            <td>
+                <span>(title: string, msg: string, error?: HttpErrorResponse): MatDialogRef&lt;AlertComponent&gt;</span>
+                Generic error message (single button message)
+            </td>
+        </tr>
+        <tr>
+            <td>genericConfirm</td>
+            <td>
+                <span>(title: string, msg: string, btn1Text: string = 'OK', btn2Text: string = 'Cancel'): MatDialogRef&lt;AlertComponent&gt;</span>
+                Displays a generic two-button confirm pop-up
+            </td>
+        </tr>
+        <tr>
+            <td>genericChoice</td>
+            <td>
+                <span>(title: string, msg: string, btn1Text: string = 'OK', btn2Text: string = 'Cancel', btn3Text: string = 'Maybe'): MatDialogRef&lt;AlertComponent&gt;</span>
+                Displays a three-button choice confirm box
+            </td>
+        </tr>
+        <tr>
+            <td>onAppError</td>
+            <td>
+                <span>(error: HttpErrorResponse): MatDialogRef&lt;AlertComponent&gt;</span>
+                Displays an error using a MatDialog
+            </td>
+        </tr>
+        <tr>
+            <td>onSubscriberError</td>
+            <td>
+                <span>(error: HttpErrorResponse, subscriber?: Subscriber&lt;any&gt;, val?: any): MatDialogRef&lt;AlertComponent&gt;</span>
+                Displays an error and completes a subscriber
+            </td>
+        </tr>
+    </tbody>
+</table>

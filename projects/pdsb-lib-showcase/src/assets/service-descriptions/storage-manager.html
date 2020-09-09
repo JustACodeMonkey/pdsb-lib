@@ -1,0 +1,54 @@
+<h1 name="storage-manager">StorageManagerService</h1>
+<p>
+    Use the StorageManagerService to get/set session variables.
+</p>
+<ul>
+    <li>Depending on the browser capabilities, either sessionStorage/localStorage or cookies are used</li>
+    <li>Application theme is always stored as a cookie</li>
+    <li>Application specific variables are stored under /appName/variableName</li>
+    <li>Common variables are stored under /sis/variableName</li>
+</ul>
+<h3>Methods</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>getTheme</td>
+            <td>Returns the theme (Always stored as a cookie)</td>
+        </tr>
+        <tr>
+            <td>setTheme</td>
+            <td>
+                <span>(val: string): boolean</span>
+                Sets the theme cookie
+            </td>
+        </tr>
+        <tr>
+            <td>get</td>
+            <td>
+                <span>(key: string): string | number | boolean | object | Array&lt;any&gt;</span>
+                Gets an item from the storage
+            </td>
+        </tr>
+        <tr>
+            <td>set</td>
+            <td>
+                <span>(key: string, val: string | number | boolean | object | Array&lt;any&gt;, expires: boolean = true, common: boolean = false): boolean</span>
+                Sets an item into the storage
+            </td>
+        </tr>
+        <tr>
+            <td>remove</td>
+            <td>
+                <span>(key: string, track: boolean = true): boolean</span>
+                Removes an item from the storage
+            </td>
+        </tr>
+        <tr>
+            <td>removeAll</td>
+            <td>
+                <span>(force: boolean = false): void</span>
+                Removes all items from the storage
+            </td>
+        </tr>
+    </tbody>
+</table>
