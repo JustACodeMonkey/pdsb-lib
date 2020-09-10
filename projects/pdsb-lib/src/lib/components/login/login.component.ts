@@ -4,6 +4,7 @@ import { ToolsService } from '../../services/tools.service';
 import { AppService } from '../../services/app.service';
 import { AuthService } from '../../services/auth.service';
 import { IBasicUserInfo } from '../../interfaces/i-basic-user-info';
+import { InternalUse } from '../../classes/internal-use';
 
 /**
  * Add <pdsb-login> to your main login component/page to handle app login
@@ -78,7 +79,7 @@ export class LoginComponent implements OnInit {
                         } else if (status === User.STATUS_LOGGED_IN) {
                             // If only a single account, select it, otherwise show account list
                             if (users.length === 1) {
-                                this._auth.selectUser(users[0]);
+                                this._auth.selectUser(new InternalUse(), users[0]);
                             } else if (users.length > 1) {
                                 this.users = users;
                             }
@@ -94,7 +95,7 @@ export class LoginComponent implements OnInit {
      * @param user The selected user
      */
     setUser(user: User) {
-        this._auth.selectUser(user);
+        this._auth.selectUser(new InternalUse(), user);
     }
 
     /**

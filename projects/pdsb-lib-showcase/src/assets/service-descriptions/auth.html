@@ -82,14 +82,6 @@
             </td>
         </tr>
         <tr>
-            <td>selectUser</td>
-            <td>
-                <span>(user: IBasicUserInfo)</span>
-                Stores the selected user information<br>
-                Outputs the .next() event on the userSelected Subject
-            </td>
-        </tr>
-        <tr>
             <td>setUserProp</td>
             <td>
                 <span>(prop: string, val: any)</span>
@@ -97,12 +89,7 @@
             </td>
         </tr>
         <tr>
-            <td>updateUserStatus</td>
-            <td>
-                <span>(u?: IBasicUserInfo)</span>
-                Updates the stored user information
-
-            </td>
+            <td colspan="2">Note: the selectUser and updateFromTokenManager should only be used internally within the library</td>
         </tr>
     </tbody>
 </table>

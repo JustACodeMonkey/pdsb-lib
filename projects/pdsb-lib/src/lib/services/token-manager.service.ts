@@ -7,6 +7,7 @@ import { ToolsService } from './tools.service';
 import { User } from '../classes/user';
 import { AppService } from './app.service';
 import { DOCUMENT } from '@angular/common';
+import { InternalUse } from '../classes/internal-use';
 
 enum VisibilityChangeName {
     DEFAULT = 'visibilitychange',
@@ -141,7 +142,7 @@ export class TokenManagerService {
                 .subscribe({
                     next: (user: User) => {
                         if (user.status === User.STATUS_LOGGED_IN) {
-                            this._auth.updateUserStatus(user);
+                            this._auth.updateFromTokenManager(new InternalUse(), user);
                         } else {
                             this._ts.genericError('Could not refresh token', 'User status is ' + user.status);
                             if (user.status === User.STATUS_LOGGED_OUT) {

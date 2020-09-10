@@ -7,6 +7,7 @@ import { User } from '../classes/user';
 import { ToolsService } from './tools.service';
 import { Subject, Observable, ReplaySubject } from 'rxjs';
 import { IBasicUserInfo } from '../interfaces/i-basic-user-info';
+import { InternalUse } from '../classes/internal-use';
 
 class Header {
     name  = '';
@@ -224,7 +225,7 @@ export class AuthService {
         return new Observable<IBasicUserInfo>(subscriber => {
             this._http
                 .delete<IBasicUserInfo>(
-                    this._as.apiRoot + this.formatUrlPart(urlPart) + 'logout/' + loginId,
+                    this._as.apiRoot + this.formatUrlPart(urlPart) + 'logout/' + (loginId ? loginId : -1),
                     this.headers
                 )
                 .subscribe({
@@ -248,21 +249,28 @@ export class AuthService {
 
     /**
      * Called when the user selects a user
+     * - THIS SHOULD ONLY BE CALLED FROM THE INTERNAL LOGIN COMPONENT
+     * @param code The internal user only code
      * @param user The User that is selected
      */
-    selectUser(user: IBasicUserInfo) {
-        this.updateUserStatus(user);
-        this._userSelected.next(user);
+    selectUser(code: InternalUse, user: IBasicUserInfo) {
+        if (code instanceof InternalUse) {
+            this.updateFromTokenManager(code, user, true);
+            this._userSelected.next(user);
+        }
     }
 
     /**
      * Updates the user's status/token stored in session storage
+     * - THIS SHOULD ONLY BE CALLED FROM THE INTERNAL TokenManagerService or this AuthService
+     * @param code The internal user only code
      * @param u The updated User object to store
+     * @param overwrite When true the entire user object is overwritten (as opposed to just the status and token)
      */
-    updateUserStatus(u?: IBasicUserInfo): void {
-        if (this._rm.isStandalone) {
+    updateFromTokenManager(code: InternalUse, u?: IBasicUserInfo, overwrite?: boolean): void {
+        if (code instanceof InternalUse && this._rm.isStandalone) {
             if (u) {
-                const user  = this.getUser();
+                const user  = overwrite ? u : this.getUser();
                 user.status = u.status;
                 user.token  = u.status === User.STATUS_LOGGED_IN ? u.token : '';
                 this._storage.set(this.USER_STORE, user, true, true);
