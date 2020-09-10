@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { StorageManagerService } from '../storage-manager/storage-manager.service';
 import { User } from '../classes/user';
 import { ToolsService } from './tools.service';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, ReplaySubject } from 'rxjs';
 import { IBasicUserInfo } from '../interfaces/i-basic-user-info';
 
 class Header {
@@ -35,13 +35,13 @@ export class AuthService {
      * The location of the session storage for the user information
      */
     readonly USER_STORE      = 'user';
-    readonly USER_UPDATED_AT = 'userUpdatedAt';
+    readonly USER_UPDATED_AT = 'token-update-time';
     
     readonly TOKEN_MAX_TIME  = 1000 * 60 * 45; // Max 45 minutes
 
     private _headers: Header[] = [];
-    private _userSelected: Subject<IBasicUserInfo> = new Subject<IBasicUserInfo>();
-    private _loggedOut: Subject<null>              = new Subject<null>();
+    private _userSelected: ReplaySubject<IBasicUserInfo> = new ReplaySubject<IBasicUserInfo>(1);
+    private _loggedOut: Subject<null>                    = new Subject<null>();
 
     constructor(
         private _as: AppService,
@@ -49,7 +49,14 @@ export class AuthService {
         private _storage: StorageManagerService,
         private _ts: ToolsService,
         private _http: HttpClient
-    ) { }
+    ) {
+        // Look for a user in the storage ... if one exists, we can emit the _userSelected ReplaySubject
+        // This will likely happen before other services/components subscribe (thus ReplaySubject)
+        const user = this.getUser();
+        if (user.status === User.STATUS_LOGGED_IN) {
+            this._userSelected.next(user);
+        }
+    }
 
     /**
      * Returns the headers for authorization used for HTTP requests
@@ -117,6 +124,39 @@ export class AuthService {
      */
     get loggedOut() {
         return this._loggedOut;
+    }
+
+    /**
+     * Returns the User's displayName
+     */
+    get displayName() {
+        return this.getUser().displayName;
+    }
+
+    /**
+     * Returns the User's status
+     */
+    get status() {
+        return this.getUser().status;
+    }
+
+    /**
+     * Returns any generic prop that is saved in the User object
+     * @param prop The name of the prop to get
+     */
+    getUserProp(prop: string): any {
+        return this.getUser()[prop];
+    }
+
+    /**
+     * Updates the specified user property and saves to user storage
+     * @param prop The name of the prop to set
+     * @param val The value to set
+     */
+    setUserProp(prop: string, val: any) {
+        const user = this.getUser();
+        user[prop] = val;
+        this._storage.set(this.USER_STORE, user, true, true);
     }
 
     /**
@@ -211,22 +251,22 @@ export class AuthService {
      * @param user The User that is selected
      */
     selectUser(user: IBasicUserInfo) {
-        this.updateUser(user);
+        this.updateUserStatus(user);
         this._userSelected.next(user);
     }
 
     /**
-     * Updates the user stored in session storage
+     * Updates the user's status/token stored in session storage
      * @param u The updated User object to store
      */
-    updateUser(u?: IBasicUserInfo): void {
+    updateUserStatus(u?: IBasicUserInfo): void {
         if (this._rm.isStandalone) {
             if (u) {
                 const user  = this.getUser();
                 user.status = u.status;
-                user.token  = user.status === User.STATUS_LOGGED_IN ? u.token : '';
+                user.token  = u.status === User.STATUS_LOGGED_IN ? u.token : '';
                 this._storage.set(this.USER_STORE, user, true, true);
-                this._storage.set(this.USER_UPDATED_AT, (new Date()).getTime());
+                this._storage.set(this.USER_UPDATED_AT, (new Date()).getTime(), true, true);
             } else {
                 this._storage.remove(this.USER_STORE);
                 this._storage.remove(this.USER_UPDATED_AT);

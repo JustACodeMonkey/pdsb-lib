@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IAlert } from './i-alert';
+import { SafeHtml } from '@angular/platform-browser';
 
 @Component({
     selector: 'pdsb-alert',
@@ -20,7 +21,7 @@ export class AlertComponent implements OnInit {
 
     // Included in IAlert
     title       = 'Alert';
-    message     = '';            // This is required
+    message: string | SafeHtml = '';            // This is required
     buttonText1 = 'OK';
     buttonText2 = 'Cancel';
     buttonText3 = 'Cancel';

@@ -141,7 +141,7 @@ export class TokenManagerService {
                 .subscribe({
                     next: (user: User) => {
                         if (user.status === User.STATUS_LOGGED_IN) {
-                            this._auth.updateUser(user);
+                            this._auth.updateUserStatus(user);
                         } else {
                             this._ts.genericError('Could not refresh token', 'User status is ' + user.status);
                             if (user.status === User.STATUS_LOGGED_OUT) {

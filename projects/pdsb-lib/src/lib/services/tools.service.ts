@@ -4,6 +4,7 @@ import { AlertComponent } from '../components/alert/alert.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { IAlert } from '../components/alert/i-alert';
 import { Subscriber } from 'rxjs';
+import { SafeHtml } from '@angular/platform-browser';
 
 /**
  * The ToolsService is used to display generic alerts or application error alerts.
@@ -59,7 +60,7 @@ export class ToolsService {
      * @param msg - The message to display
      * @param error - Optional error object (with message property) to display
      */
-    genericError(title: string, msg: string, error?: HttpErrorResponse): MatDialogRef<AlertComponent> {
+    genericError(title: string, msg: string | SafeHtml, error?: HttpErrorResponse): MatDialogRef<AlertComponent> {
         const content = msg + (error ? `<p>${error.message}</p>` : '');
         return this._dialog.open(AlertComponent, {
             data: {
@@ -77,7 +78,7 @@ export class ToolsService {
      * @param btn1Text - The text for button 1 (default is OK)
      * @param btn2Text - The text for button 2 (default is Cancel)
      */
-    genericConfirm(title: string, msg: string, btn1Text: string = 'OK', btn2Text: string = 'Cancel'): MatDialogRef<AlertComponent> {
+    genericConfirm(title: string, msg: string | SafeHtml, btn1Text: string = 'OK', btn2Text: string = 'Cancel'): MatDialogRef<AlertComponent> {
         return this._dialog.open(AlertComponent, {
             data: {
                 title,
@@ -98,7 +99,7 @@ export class ToolsService {
      * @param btn2Text - The text for button 2 (default is Cancel)
      * @param btn3Text - The text for button 3 (default is Maybe)
      */
-    genericChoice(title: string, msg: string, btn1Text: string = 'OK', btn2Text: string = 'Cancel', btn3Text: string = 'Maybe'): MatDialogRef<AlertComponent> {
+    genericChoice(title: string, msg: string | SafeHtml, btn1Text: string = 'OK', btn2Text: string = 'Cancel', btn3Text: string = 'Maybe'): MatDialogRef<AlertComponent> {
         return this._dialog.open(AlertComponent, {
             data: {
                 title,

@@ -30,21 +30,21 @@
         <tr>
             <td>genericError</td>
             <td>
-                <span>(title: string, msg: string, error?: HttpErrorResponse): MatDialogRef&lt;AlertComponent&gt;</span>
+                <span>(title: string, msg: string | SafeHtml, error?: HttpErrorResponse): MatDialogRef&lt;AlertComponent&gt;</span>
                 Generic error message (single button message)
             </td>
         </tr>
         <tr>
             <td>genericConfirm</td>
             <td>
-                <span>(title: string, msg: string, btn1Text: string = 'OK', btn2Text: string = 'Cancel'): MatDialogRef&lt;AlertComponent&gt;</span>
+                <span>(title: string, msg: string | SafeHtml, btn1Text: string = 'OK', btn2Text: string = 'Cancel'): MatDialogRef&lt;AlertComponent&gt;</span>
                 Displays a generic two-button confirm pop-up
             </td>
         </tr>
         <tr>
             <td>genericChoice</td>
             <td>
-                <span>(title: string, msg: string, btn1Text: string = 'OK', btn2Text: string = 'Cancel', btn3Text: string = 'Maybe'): MatDialogRef&lt;AlertComponent&gt;</span>
+                <span>(title: string, msg: string | SafeHtml, btn1Text: string = 'OK', btn2Text: string = 'Cancel', btn3Text: string = 'Maybe'): MatDialogRef&lt;AlertComponent&gt;</span>
                 Displays a three-button choice confirm box
             </td>
         </tr>
