@@ -82,15 +82,19 @@ export class AuthService {
      */
     get hasToken() {
         const user = this.getUser();
-        return (user && user.token && user.token !== '');
+        return (user && user.token && user.token !== '')
+            ? true
+            : false;
     }
 
     /**
      * Returns true when the user is logged in
      */
-    get isLoggedIn() {
+    get isLoggedIn(): boolean {
         const user = this.getUser();
-        return (this.hasToken && user.status === User.STATUS_LOGGED_IN);
+        return (this.hasToken && user.status === User.STATUS_LOGGED_IN)
+            ? true
+            : false;
     }
 
     /**
@@ -106,7 +110,9 @@ export class AuthService {
      * Returns true if the user is logged in and the token time is valid
      */
     get isLoggedInAndValidTime() {
-        return (this.isLoggedIn && this.tokenTimeValid);
+        return (this.isLoggedIn && this.tokenTimeValid)
+            ? true
+            : false;
     }
 
     /**
