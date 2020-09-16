@@ -1,6 +1,6 @@
 {
   "name": "pdsb-lib",
-  "version": "10.1.11",
+  "version": "10.1.12",
   "description": "This library contains components and services to support SIS Angular applications at the Peel District School Board.",
   "license": "MIT",
   "repository": {

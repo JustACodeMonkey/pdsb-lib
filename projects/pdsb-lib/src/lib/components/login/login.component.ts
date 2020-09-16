@@ -83,6 +83,9 @@ export class LoginComponent implements OnInit {
                             } else if (users.length > 1) {
                                 this.users = users;
                             }
+                        } else {
+                            // Some other application specific status code ... return the 1st user
+                            this._auth.selectUser(new InternalUse(), users[0]);
                         }
                     }
                     this.isLoggingIn = false;
