@@ -40,6 +40,7 @@ export class AuthService {
     
     readonly TOKEN_MAX_TIME  = 1000 * 60 * 45; // Max 45 minutes
 
+    private _isSISapp = true;
     private _headers: Header[] = [];
     private _userSelected: ReplaySubject<IBasicUserInfo> = new ReplaySubject<IBasicUserInfo>(1);
     private _loggedOut: Subject<null>                    = new Subject<null>();
@@ -144,6 +145,13 @@ export class AuthService {
     }
 
     /**
+     * When true, user changes save to the /sis/ storage area
+     */
+    set isSISapp(isSISapp: boolean) {
+        this._isSISapp = isSISapp;
+    }
+
+    /**
      * Returns any generic prop that is saved in the User object
      * @param prop The name of the prop to get
      */
@@ -159,7 +167,7 @@ export class AuthService {
     setUserProp(prop: string, val: any) {
         const user = this.getUser();
         user[prop] = val;
-        this._storage.set(this.USER_STORE, user, true, true);
+        this._storage.set(this.USER_STORE, user, true, this._isSISapp);
     }
 
     /**
@@ -275,8 +283,8 @@ export class AuthService {
                 const user  = overwrite ? u : this.getUser();
                 user.status = u.status;
                 user.token  = u.status === User.STATUS_LOGGED_IN ? u.token : '';
-                this._storage.set(this.USER_STORE, user, true, true);
-                this._storage.set(this.USER_UPDATED_AT, (new Date()).getTime(), true, true);
+                this._storage.set(this.USER_STORE, user, true, this._isSISapp);
+                this._storage.set(this.USER_UPDATED_AT, (new Date()).getTime(), true, this._isSISapp);
             } else {
                 this._storage.remove(this.USER_STORE);
                 this._storage.remove(this.USER_UPDATED_AT);
