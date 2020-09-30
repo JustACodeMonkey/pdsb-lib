@@ -25,7 +25,8 @@ import { HtmlLoaderComponent } from './pages/html-loader/html-loader.component';
         AppRoutingModule,
         PdsbLibModule.forRoot({
             apiRoot: '',
-            version: '1.00'
+            version: '',
+            isSISapp: false
         }),
         MatTabsModule
     ],

@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { Idle, DEFAULT_INTERRUPTSOURCES } from '@ng-idle/core';
 import { MatDialog } from '@angular/material/dialog';
 import { InactivityManagerComponent } from './inactivity-manager.component';
+import { PdsbLibConfiguration } from '../lib-configuration';
 
 /**
  * Use the InactivityManagerService to ensure the user has not left their session inactive for too long
@@ -29,9 +30,12 @@ export class InactivityManagerService {
     private _inactiveTimeExceeded: Subject<boolean> = new Subject<boolean>();
     
     constructor(
+        private readonly _config: PdsbLibConfiguration,
         private _idle: Idle,
         private _dialog: MatDialog
     ) {
+        this._secondsUntilWarning = this._config.inactivityManagerSecondsUntilWarning;
+        this._secondsToWarn       = this._config.inactivityManagerSecondsToWarn;
         this.init();
     }
 

@@ -8,6 +8,7 @@ import { User } from '../classes/user';
 import { AppService } from './app.service';
 import { DOCUMENT } from '@angular/common';
 import { InternalUse } from '../classes/internal-use';
+import { PdsbLibConfiguration } from '../lib-configuration';
 
 enum VisibilityChangeName {
     DEFAULT = 'visibilitychange',
@@ -45,6 +46,7 @@ export class TokenManagerService {
     private _appHasGoneDown: Subject<null>    = new Subject<null>();
 
     constructor(
+        private readonly _config: PdsbLibConfiguration,
         private _as: AppService,
         private _rm: RunModeService,
         private _auth: AuthService,
@@ -52,6 +54,8 @@ export class TokenManagerService {
         private _http: HttpClient,
         @Inject(DOCUMENT) private _doc: Document
     ) {
+        this._intervalTime = this._config.tokenManagerIntervalTime;
+
         if (this._rm.isStandalone) {
             this.watchWindowState();
             this.maintainToken();

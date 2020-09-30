@@ -1,9 +1,10 @@
+// Configuration
+export * from './lib/lib-configuration';
 // Interfaces
 export * from './lib/interfaces/i-basic-user-info';
 export * from './lib/components/alert/i-alert';
 export * from './lib/print-manager/i-print-manager-data';
 // Classes
-export * from './lib/classes/pdsb-lib-config';
 export * from './lib/classes/user';
 export * from './lib/print-manager/print-params';
 export * from './lib/print-manager/print-status';

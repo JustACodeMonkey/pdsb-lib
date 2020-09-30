@@ -8,6 +8,7 @@ import { ToolsService } from './tools.service';
 import { Subject, Observable, ReplaySubject } from 'rxjs';
 import { IBasicUserInfo } from '../interfaces/i-basic-user-info';
 import { InternalUse } from '../classes/internal-use';
+import { PdsbLibConfiguration } from '../lib-configuration';
 
 class Header {
     name  = '';
@@ -46,12 +47,15 @@ export class AuthService {
     private _loggedOut: Subject<null>                    = new Subject<null>();
 
     constructor(
+        private readonly _config: PdsbLibConfiguration,
         private _as: AppService,
         private _rm: RunModeService,
         private _storage: StorageManagerService,
         private _ts: ToolsService,
         private _http: HttpClient
     ) {
+        this._isSISapp = this._config.isSISapp;
+
         // Look for a user in the storage ... if one exists, we can emit the _userSelected ReplaySubject
         // This will likely happen before other services/components subscribe (thus ReplaySubject)
         const user = this.getUser();

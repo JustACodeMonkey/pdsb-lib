@@ -13,9 +13,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { AlertComponent } from './components/alert/alert.component';
 import { InactivityManagerComponent } from './inactivity-manager/inactivity-manager.component';
 import { PrintManagerComponent } from './print-manager/print-manager.component';
-import { PdsbLibConfig } from './classes/pdsb-lib-config';
 import { LoginComponent } from './components/login/login.component';
 import { HtmlLoaderComponent } from './components/html-loader/html-loader.component';
+import { PdsbLibConfiguration } from './lib-configuration';
+
+class PdsbLibDefaultConfiguration extends PdsbLibConfiguration {
+    apiRoot  = '';
+    version  = '';
+    isSISapp = true;
+    inactivityManagerSecondsUntilWarning = 1080;
+    inactivityManagerSecondsToWarn       = 120;
+    tokenManagerIntervalTime             = 1000 * 60 * 20; // 20 minutes
+}
 
 @NgModule({
     declarations: [
@@ -58,15 +67,18 @@ import { HtmlLoaderComponent } from './components/html-loader/html-loader.compon
     ]
 })
 export class PdsbLibModule {
-    static forRoot (
-        pdsbLibConfig: PdsbLibConfig
-    ): ModuleWithProviders<PdsbLibModule> {
+    static forRoot(options: PdsbLibConfiguration): ModuleWithProviders<PdsbLibModule> {
+        // Apply the default options if they weren't included
+        const config = new PdsbLibDefaultConfiguration();
+        Object.keys(config).forEach(key => {
+            config[key] = options.hasOwnProperty(key) ? options[key] : config[key];
+        });
         return {
             ngModule: PdsbLibModule,
             providers: [
                 {
-                    provide: PdsbLibConfig,
-                    useValue: pdsbLibConfig
+                    provide: PdsbLibConfiguration,
+                    useValue: config
                 }
             ]
         }

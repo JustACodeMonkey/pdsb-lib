@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { PdsbLibConfig } from '../classes/pdsb-lib-config';
+import { PdsbLibConfiguration } from '../lib-configuration';
 
 /** @dynamic
  * Use the AppService to get
@@ -17,7 +17,7 @@ export class AppService {
     private _version = '';
 
     constructor(
-        private _config: PdsbLibConfig,
+        private readonly _config: PdsbLibConfiguration,
         @Inject(DOCUMENT) private _doc: Document
     ) {
         this._apiRoot = this._config.apiRoot;
