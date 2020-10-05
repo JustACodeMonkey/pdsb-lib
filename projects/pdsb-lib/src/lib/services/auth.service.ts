@@ -209,6 +209,11 @@ export class AuthService {
     login(username: string, password: string, urlPart: string = ''): Observable<IBasicUserInfo[]> {
         const url        = this._as.apiRoot + this.formatUrlPart(urlPart) + 'login';
         const appVersion = this._as.version;
+        // If the user is trying to login with their @pdsb.net account, just take the P# portion
+        const pdsbNet    = username.indexOf('@pdsb.net');
+        if (pdsbNet > -1) {
+            username = username.substring(0, pdsbNet);
+        }
         return new Observable<IBasicUserInfo[]>(subscriber => {
             this._http
                 .post<IBasicUserInfo[]>(

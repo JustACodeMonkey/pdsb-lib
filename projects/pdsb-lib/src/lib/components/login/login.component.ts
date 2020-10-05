@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    onLogin() {
+    onLogin(): void {
         this.isLoggingIn = true;
         this._auth
             .login(this.user.username, this.user.password, this.urlPart)
@@ -97,14 +97,14 @@ export class LoginComponent implements OnInit {
      * Sets the selected user
      * @param user The selected user
      */
-    setUser(user: User) {
+    setUser(user: User): void {
         this._auth.selectUser(new InternalUse(), user);
     }
 
     /**
      * Show a pop-up when the username or password are incorrect
      */
-    private invalidUsernameOrPassword() {
+    private invalidUsernameOrPassword(): void {
         this._ts.genericError('Login Error', 'The username or password are incorrect');
     }
 }
