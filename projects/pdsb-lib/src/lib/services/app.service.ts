@@ -24,30 +24,30 @@ export class AppService {
         this._version = this._config.version;
     }
 
-    get apiRoot() {
+    get apiRoot(): string {
         return this._apiRoot;
     }
-    get version() {
+    get version(): string {
         return this._version;
     }
 
-    get isProd() {
+    get isProd(): boolean {
         const href = this.href();
         return href.indexOf('://gweb11') > -1
             || href.indexOf('://ssp-') > -1;
     }
 
-    get isNotProd() {
+    get isNotProd(): boolean {
         return !this.isProd;
     }
 
-    get isDev() {
+    get isDev(): boolean {
         const href = this.href();
         return href.indexOf('://devweb2') > -1
             || href.indexOf('://dev-sspweb') > -1;
     }
 
-    get isLocalHost() {
+    get isLocalHost(): boolean {
         const href = this.href();
         return href.indexOf('://localhost') > -1
             || href.indexOf(':4200') > -1;
@@ -56,11 +56,11 @@ export class AppService {
     /**
      * Forces the window to refresh
      */
-    forceRefresh() {
+    forceRefresh(): void {
         this._doc.location.reload(true);
     }
 
-    private href() {
+    private href(): string {
         return this._doc.location.href;
     }
 }

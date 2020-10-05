@@ -272,7 +272,7 @@ export class AuthService {
      * @param code The internal user only code
      * @param user The User that is selected
      */
-    selectUser(code: InternalUse, user: IBasicUserInfo) {
+    selectUser(code: InternalUse, user: IBasicUserInfo): void {
         if (code instanceof InternalUse) {
             this.updateFromTokenManager(code, user, true);
             this._userSelected.next(user);

@@ -17,14 +17,14 @@ export class RunModeService {
     /**
      * Returns true when the application is running in a child window
      */
-    get isChild() {
+    get isChild(): boolean {
         return this._wm.parentWindow !== null;
     }
 
     /**
      * Returns true when the application is running in its own (non-child) window
      */
-    get isStandalone() {
+    get isStandalone(): boolean {
         return this._wm.parentWindow === null;
     }
 }

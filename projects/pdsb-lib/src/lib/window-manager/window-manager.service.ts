@@ -13,6 +13,8 @@ import { DOCUMENT } from '@angular/common';
 })
 export class WindowManagerService {
 
+    private _referrer = '';
+
     /**
      * Reference to the current window
      */
@@ -40,7 +42,9 @@ export class WindowManagerService {
      * Returns a reference to the parent window || null
      */
     get parentWindow(): Window {
-        return this._win.opener || null;
+        return this.isChildOfSameDomain()
+            ? this._win.opener
+            : null;
     }
 
     /**
@@ -152,5 +156,13 @@ export class WindowManagerService {
                 // All messages are dispatched through the Subject
                 this._messageReceived.next(e);
             });
+    }
+
+    /**
+     * Returns true when the window is a child of the same domain referrer
+     */
+    private isChildOfSameDomain(): boolean {
+        return this._win.opener
+            && this._doc.referrer.indexOf(this._doc.location.host) > -1;
     }
 }
