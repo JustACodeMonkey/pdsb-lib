@@ -76,16 +76,13 @@ export class LoginComponent implements OnInit {
                         } else if (status === User.STATUS_BAD_USERNAME || status === User.STATUS_BAD_PASSWORD) {
                             // Display invalid username/password message
                             this.invalidUsernameOrPassword();
-                        } else if (status === User.STATUS_LOGGED_IN) {
+                        } else {
                             // If only a single account, select it, otherwise show account list
                             if (users.length === 1) {
                                 this._auth.selectUser(new InternalUse(), users[0]);
                             } else if (users.length > 1) {
                                 this.users = users;
                             }
-                        } else {
-                            // Some other application specific status code ... return the 1st user
-                            this._auth.selectUser(new InternalUse(), users[0]);
                         }
                     }
                     this.isLoggingIn = false;
