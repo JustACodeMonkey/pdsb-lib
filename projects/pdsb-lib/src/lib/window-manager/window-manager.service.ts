@@ -2,6 +2,7 @@ import { Injectable, RendererFactory2, Inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { MessageData } from './message-data';
 import { DOCUMENT } from '@angular/common';
+import { PdsbLibConfiguration } from '../lib-configuration';
 
 /** @dynamic =
  * Use the WindowManagerSerivce to pass messages between windows and to open child windows
@@ -13,7 +14,8 @@ import { DOCUMENT } from '@angular/common';
 })
 export class WindowManagerService {
 
-    private _referrer = '';
+    private _assumeParentApp = false;
+    private _referrer        = '';
 
     /**
      * Reference to the current window
@@ -31,10 +33,12 @@ export class WindowManagerService {
     private _messageReceived: Subject<MessageEvent> = new Subject<MessageEvent>();
 
     constructor(
+        private readonly _config: PdsbLibConfiguration,
         private _rf: RendererFactory2,
         @Inject(DOCUMENT) private _doc: Document
     ) {
-        this._win = (this._doc as Document).defaultView;
+        this._assumeParentApp = this._config.assumeParentApp;
+        this._win             = (this._doc as Document).defaultView;
         this.initListener();
     }
 
@@ -163,6 +167,7 @@ export class WindowManagerService {
      */
     private isChildOfSameDomain(): boolean {
         return this._win.opener
+            && !this._assumeParentApp
             && this._doc.referrer.indexOf(this._doc.location.host) > -1;
     }
 }

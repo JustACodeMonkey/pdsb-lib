@@ -41,7 +41,8 @@ export class AuthService {
     
     readonly TOKEN_MAX_TIME  = 1000 * 60 * 45; // Max 45 minutes
 
-    private _isSISapp = true;
+    private _isSISapp          = true;
+    private _assumeParentApp   = false;
     private _headers: Header[] = [];
     private _userSelected: ReplaySubject<IBasicUserInfo> = new ReplaySubject<IBasicUserInfo>(1);
     private _loggedOut: Subject<null>                    = new Subject<null>();
@@ -54,7 +55,8 @@ export class AuthService {
         private _ts: ToolsService,
         private _http: HttpClient
     ) {
-        this._isSISapp = this._config.isSISapp;
+        this._isSISapp        = this._config.isSISapp;
+        this._assumeParentApp = this._config.assumeParentApp;
 
         // Look for a user in the storage ... if one exists, we can emit the _userSelected ReplaySubject
         // This will likely happen before other services/components subscribe (thus ReplaySubject)
@@ -287,7 +289,7 @@ export class AuthService {
      * @param overwrite When true the entire user object is overwritten (as opposed to just the status and token)
      */
     updateFromTokenManager(code: InternalUse, u?: IBasicUserInfo, overwrite?: boolean): void {
-        if (code instanceof InternalUse && this._rm.isStandalone) {
+        if (code instanceof InternalUse && (this._assumeParentApp || this._rm.isStandalone)) {
             if (u) {
                 const user  = overwrite ? u : this.getUser();
                 user.status = u.status;

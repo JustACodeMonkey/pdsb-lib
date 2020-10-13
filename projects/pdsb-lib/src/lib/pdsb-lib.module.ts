@@ -18,9 +18,10 @@ import { HtmlLoaderComponent } from './components/html-loader/html-loader.compon
 import { PdsbLibConfiguration } from './lib-configuration';
 
 class PdsbLibDefaultConfiguration extends PdsbLibConfiguration {
-    apiRoot  = '';
-    version  = '';
-    isSISapp = true;
+    apiRoot         = '';
+    version         = '';
+    isSISapp        = true;
+    assumeParentApp = true;
     inactivityManagerSecondsUntilWarning = 1080;
     inactivityManagerSecondsToWarn       = 120;
     tokenManagerIntervalTime             = 1000 * 60 * 20; // 20 minutes

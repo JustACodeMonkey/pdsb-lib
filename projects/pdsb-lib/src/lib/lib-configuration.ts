@@ -4,6 +4,7 @@ export class PdsbLibConfiguration {
     version: string;
     // Setup for AuthService (OPTIONAL)
     isSISapp?: boolean;
+    assumeParentApp?: boolean;
     // Setup for InactivityManager (OPTIONAL)
     inactivityManagerSecondsUntilWarning?: number;
     inactivityManagerSecondsToWarn?: number;

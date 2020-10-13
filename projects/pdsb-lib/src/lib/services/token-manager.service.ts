@@ -38,8 +38,9 @@ enum VisibilityStateName {
 export class TokenManagerService {
 
     private _interval: Observable<number>;
-    private _intervalTime = 1000 * 60 * 20;
-    private _lastUpdate   = 0;
+    private _intervalTime    = 1000 * 60 * 20;
+    private _lastUpdate      = 0;
+    private _assumeParentApp = false;
 
     private _tokenExpired: Subject<null>      = new Subject<null>();
     private _appVersionChanged: Subject<null> = new Subject<null>();
@@ -54,9 +55,10 @@ export class TokenManagerService {
         private _http: HttpClient,
         @Inject(DOCUMENT) private _doc: Document
     ) {
-        this._intervalTime = this._config.tokenManagerIntervalTime;
+        this._intervalTime    = this._config.tokenManagerIntervalTime;
+        this._assumeParentApp = this._config.assumeParentApp;
 
-        if (this._rm.isStandalone) {
+        if (this._assumeParentApp || this._rm.isStandalone) {
             this.watchWindowState();
             this.maintainToken();
         };
