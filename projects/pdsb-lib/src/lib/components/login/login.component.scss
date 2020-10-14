@@ -1,13 +1,10 @@
 :host {
-    display: block;
+    display: block !important;
 }
 div.login-container {
     padding: 54px 0;
     width: 100%;
     max-width: 300px;
-}
-form {
-    width: 100%;
 }
 div.list {
     padding: 4px 0;
