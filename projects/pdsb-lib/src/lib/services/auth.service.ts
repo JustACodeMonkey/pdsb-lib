@@ -253,14 +253,17 @@ export class AuthService {
                     next: (user: IBasicUserInfo) => {
                         this._headers = [];
                         this._storage.removeAll(true);
+                        this._userSelected.next(user);
                         subscriber.next(user);
                         subscriber.complete();
                         this._loggedOut.next();
                     },
                     error: error => {
+                        const user    = new User();
                         this._headers = [];
                         this._storage.removeAll(true);
-                        subscriber.next(new User());
+                        this._userSelected.next(user);
+                        subscriber.next(user);
                         subscriber.complete();
                         this._loggedOut.next();
                     }
