@@ -10,6 +10,7 @@ import { AlertsComponent } from './pages/alerts/alerts.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { HtmlLoaderComponent } from './pages/html-loader/html-loader.component';
+import { AppService, AuthService, TokenManagerService } from 'projects/pdsb-lib/src/public-api';
 
 @NgModule({
     declarations: [
@@ -24,13 +25,22 @@ import { HtmlLoaderComponent } from './pages/html-loader/html-loader.component';
         BrowserAnimationsModule,
         AppRoutingModule,
         PdsbLibModule.forRoot({
-            apiRoot: '',
-            version: '',
-            isSISapp: false
+            apiRoot:   '',
+            version:   '',
+            isSISapp:  false,
+            tokenPath: 'user/'
         }),
         MatTabsModule
     ],
     providers: [],
     bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    /*
+    constructor(
+        private _app: AppService,
+        private _auth: AuthService,
+        private _tm: TokenManagerService
+    ) {}
+    */
+ }

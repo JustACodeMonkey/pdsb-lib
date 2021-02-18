@@ -159,7 +159,6 @@ export class PrintManagerComponent implements OnInit, OnDestroy {
                     .checkJob(this._printStatus.jobId, this._printStatus.server)
                     .subscribe({
                         next: (printStatus: PrintStatus) => {
-                            console.log(printStatus);
                             const status = printStatus.status;
                             if (status === PrintStatus.STATUS_FAILED || status >= PrintStatus.STATUS_ERROR) {
                                 this.onReportError();

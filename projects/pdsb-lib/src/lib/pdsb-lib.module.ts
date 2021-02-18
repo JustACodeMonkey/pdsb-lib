@@ -25,6 +25,7 @@ class PdsbLibDefaultConfiguration extends PdsbLibConfiguration {
     inactivityManagerSecondsUntilWarning = 1080;
     inactivityManagerSecondsToWarn       = 120;
     tokenManagerIntervalTime             = 1000 * 60 * 20; // 20 minutes
+    tokenPath       = '';
 }
 
 @NgModule({

@@ -10,4 +10,5 @@ export class PdsbLibConfiguration {
     inactivityManagerSecondsToWarn?: number;
     // Setup for TokenManager (OPTIONAL)
     tokenManagerIntervalTime?: number;
+    tokenPath?: string;
 }

@@ -41,6 +41,7 @@ export class TokenManagerService {
     private _intervalTime    = 1000 * 60 * 20;
     private _lastUpdate      = 0;
     private _assumeParentApp = false;
+    private _tokenPath       = '';
 
     private _tokenExpired: Subject<null>      = new Subject<null>();
     private _appVersionChanged: Subject<null> = new Subject<null>();
@@ -57,6 +58,7 @@ export class TokenManagerService {
     ) {
         this._intervalTime    = this._config.tokenManagerIntervalTime;
         this._assumeParentApp = this._config.assumeParentApp;
+        this._tokenPath       = this._config.tokenPath || '';
 
         if (this._assumeParentApp || this._rm.isStandalone) {
             this.watchWindowState();
@@ -142,7 +144,7 @@ export class TokenManagerService {
             this._lastUpdate = now;
             this._http
                 .get<User>(
-                    this._as.apiRoot + 'refresh-token?version=' + this._as.version,
+                    this._as.apiRoot + this._tokenPath + 'refresh-token?version=' + this._as.version,
                     this._auth.headers
                 )
                 .subscribe({
