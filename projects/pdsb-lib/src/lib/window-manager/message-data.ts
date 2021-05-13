@@ -11,6 +11,12 @@ export class MessageData {
     static readonly ACTION_CLOSE = 'close';
 
     /**
+     * The type of message being sent
+     */
+    static readonly TYPE_WINDOW  = 'window';
+    static readonly TYPE_IFRAME  = 'iFrame';
+
+    /**
      * Derived from window.name in the child window. This name will match the name
      * from when the window was created
      */
@@ -31,10 +37,16 @@ export class MessageData {
      */
     message: any;
 
-    constructor(appId: string, appName: string, action: string, message: any) {
-        this.appId   = appId;
-        this.appName = appName;
-        this.action  = action;
-        this.message = message;
+    /**
+     * The type of message (window or iFrame)
+     */
+    messageType: string;
+
+    constructor(appId: string, appName: string, action: string, message: any, messageType: string) {
+        this.appId       = appId;
+        this.appName     = appName;
+        this.action      = action;
+        this.message     = message;
+        this.messageType = messageType;
     }
 }

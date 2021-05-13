@@ -11,6 +11,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { HtmlLoaderComponent } from './pages/html-loader/html-loader.component';
 import { AppService, AuthService, TokenManagerService } from 'projects/pdsb-lib/src/public-api';
+import { IFrameComponent } from './pages/i-frame/i-frame.component';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { AppService, AuthService, TokenManagerService } from 'projects/pdsb-lib/
         AlertsComponent,
         LoginComponent,
         ServicesComponent,
-        HtmlLoaderComponent
+        HtmlLoaderComponent,
+        IFrameComponent
     ],
     imports: [
         BrowserModule,

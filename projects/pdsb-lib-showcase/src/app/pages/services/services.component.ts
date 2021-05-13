@@ -19,6 +19,7 @@ export class ServicesComponent {
     sources: Source[] = [
         new Source('AppService', 'app'),
         new Source('AuthService', 'auth'),
+        new Source('IFrameManagerService', 'i-frame-manager'),
         new Source('InactivityMonitorService', 'inactivity-manager'),
         new Source('PrintManagerService', 'print-manager'),
         new Source('RunModeService', 'run-mode'),

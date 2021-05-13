@@ -1,0 +1,57 @@
+<h1 name="i-frame-manager">IFrameManagerService</h1>
+<p>
+    Use the IFrameManagerService to pass messages between the base application and iFrames.
+</p>
+<ul>
+    <li>When iFrames are opened this way, logging out of the application will automatically close those children</li>
+</ul>
+<h3>Properties</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>parentWindow</td>
+            <td>Returns a reference to the parent window || null</td>
+        </tr>
+        <tr>
+            <td>thisFrame</td>
+            <td>Returns a reference to the window of the iFrame || null</td>
+        </tr>
+    </tbody>
+</table>
+<h3>Methods</h3>
+<table>
+    <tbody>
+        <tr>
+            <td>open</td>
+            <td>
+                <span>(url: string, id: string, styleOptions?: {}): void</span>
+                Opens a iFrame
+            </td>
+        </tr>
+        <tr>
+            <td>close</td>
+            <td>
+                <span>(id: string, tellParent: boolean = false): void</span>
+                Closes an iFrame
+            </td>
+        </tr>
+        <tr>
+            <td>closeAll</td>
+            <td>Closes all open iFrames</td>
+        </tr>
+        <tr>
+            <td>postToChild</td>
+            <td>
+                <span>(id: string, message: MessaegData, targetOrigin: string = '*'): void</span>
+                Posts a message to a child iFrame
+            </td>
+        </tr>
+        <tr>
+            <td>postToParent</td>
+            <td>
+                <span>(message: MessaegData, targetOrigin: string = '*'): void</span>
+                Posts a message to the Window object of the parent
+            </td>
+        </tr>
+    </tbody>
+</table>

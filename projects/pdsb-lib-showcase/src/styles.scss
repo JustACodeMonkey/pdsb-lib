@@ -304,3 +304,8 @@ strong,
 .position-fixed		{position:fixed;}
 
 .pointer {cursor: pointer;}
+
+iframe {
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+}

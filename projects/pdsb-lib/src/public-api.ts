@@ -25,6 +25,7 @@ export * from './lib/services/token-manager.service';
 export * from './lib/services/tools.service'
 export * from './lib/print-manager/print-manager.service';
 export * from './lib/storage-manager/storage-manager.service';
+export * from './lib/window-manager/i-frame-manager.service';
 export * from './lib/window-manager/window-manager.service';
 // Modules
 export * from './lib/pdsb-lib.module';

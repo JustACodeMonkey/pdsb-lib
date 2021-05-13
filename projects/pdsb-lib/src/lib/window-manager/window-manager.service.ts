@@ -105,7 +105,7 @@ export class WindowManagerService {
      * @param message The message to send
      * @param targetOrigin The targetOrigin (optional - leave blank)
      */
-    postToChild(name: string, message: any, targetOrigin: string = '*'): void {
+    postToChild(name: string, message: MessageData, targetOrigin: string = '*'): void {
         this.post(this.getWindow(name), message, targetOrigin);
     }
 
@@ -114,7 +114,7 @@ export class WindowManagerService {
      * @param message The message to send
      * @param targetOrigin The targetOrigin (optional - leave blank)
      */
-    postToParent(message: any, targetOrigin: string = '*'): void {
+    postToParent(message: MessageData, targetOrigin: string = '*'): void {
         this.post(this.parentWindow, message, targetOrigin);
     }
 
@@ -124,7 +124,7 @@ export class WindowManagerService {
      * @param message The message to send
      * @param targetOrigin The targetOrigin
      */
-    private post(win: Window, message: any, targetOrigin: string): void {
+    private post(win: Window, message: MessageData, targetOrigin: string): void {
         if (win) {
             win.postMessage(message, targetOrigin);
         }
@@ -153,12 +153,14 @@ export class WindowManagerService {
             .createRenderer(null, null)
             .listen('window', 'message', (e: MessageEvent) => {
                 const data = e.data as MessageData;
-                // If the action is close, we will close the child window
-                if (data.action === MessageData.ACTION_CLOSE) {
-                    this.close(data.appId);
+                if (data && data.messageType && data.messageType === MessageData.TYPE_WINDOW) {
+                    // If the action is close, we will close the child window
+                    if (data.action === MessageData.ACTION_CLOSE) {
+                        this.close(data.appId);
+                    }
+                    // All messages are dispatched through the Subject
+                    this._messageReceived.next(e);
                 }
-                // All messages are dispatched through the Subject
-                this._messageReceived.next(e);
             });
     }
 

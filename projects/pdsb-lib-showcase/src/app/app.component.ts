@@ -21,7 +21,8 @@ export class AppComponent {
         new Page('Alerts', 'alerts'),
         new Page('Login', 'login'),
         new Page('HTML Loader', 'html-loader'),
-        new Page('Services', 'services')
+        new Page('Services', 'services'),
+        new Page('IFrameManager', 'iframe')
     ];
     title = 'pdsb-lib-showcase';
 }
