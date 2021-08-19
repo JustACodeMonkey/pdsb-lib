@@ -8,4 +8,6 @@ export interface IAlert {
     buttonText3?: string;
     showButton2?: boolean;
     showButton3?: boolean;
+    icon?: string;
+    iconColor?: string;
 }

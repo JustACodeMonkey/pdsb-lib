@@ -1,4 +1,6 @@
-# pdsb-lib
+# pdsb-lib v12.0.0
+v12.0.1 is compiled with Ivy and requires Angular 12 or higher.
+
 This library contains components and services to support SIS Angular applications at the Peel District School Board.
 
 Apps must include
@@ -22,6 +24,7 @@ Apps must include
 ## AlertComponent
 - Simple 1, 2, or 3 button alert/confirmation dialog, based on MatDialog
 - IAlert defines the data
+- Updated to allow icon and iconColor prior to title
 
 ## InactivityComponent
 - Count-down alert popup, based on MatDialog
@@ -44,6 +47,9 @@ The AuthService is used to
 - Update the token information stored in the session storage
 - Determine if the user has a token
 - Determine if the user has a is logged in with a valid token (i.e. the token has not expired)
+
+## IFrameManagerService
+The IFrameManagerService is a simple manager to open/close iFrames and handle communication between parent/child iFrames. It is used to more closely mimic Oracle Forms by opening directly on top of a parent app instead of in a child window/tab. Default settings open the iFrame at 100vw and 100vh.
 
 ## PrintManagerService
 The PrintManagerService works with PrintManagerComponent to handle printing to an Oracle print server

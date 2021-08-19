@@ -60,12 +60,20 @@ export class ToolsService {
      * @param msg - The message to display
      * @param error - Optional error object (with message property) to display
      */
-    genericError(title: string, msg: string | SafeHtml, error?: HttpErrorResponse): MatDialogRef<AlertComponent> {
+    genericError(
+        title: string, 
+        msg: string | SafeHtml, 
+        error?: HttpErrorResponse, 
+        icon?: string, 
+        iconColor?: string
+    ): MatDialogRef<AlertComponent> {
         const content = msg + (error ? `<p>${error.message}</p>` : '');
         return this._dialog.open(AlertComponent, {
             data: {
                 title,
-                message: content
+                message: content,
+                icon: icon || '',
+                iconColor: iconColor || 'warn'
             } as IAlert,
             disableClose: true
         } as MatDialogConfig);
@@ -78,14 +86,23 @@ export class ToolsService {
      * @param btn1Text - The text for button 1 (default is OK)
      * @param btn2Text - The text for button 2 (default is Cancel)
      */
-    genericConfirm(title: string, msg: string | SafeHtml, btn1Text: string = 'OK', btn2Text: string = 'Cancel'): MatDialogRef<AlertComponent> {
+    genericConfirm(
+        title: string, 
+        msg: string | SafeHtml, 
+        btn1Text: string = 'OK', 
+        btn2Text: string = 'Cancel', 
+        icon?: string, 
+        iconColor?: string
+    ): MatDialogRef<AlertComponent> {
         return this._dialog.open(AlertComponent, {
             data: {
                 title,
                 message: msg,
                 buttonText1: btn1Text,
                 buttonText2: btn2Text,
-                showButton2: true
+                showButton2: true,
+                icon: icon || '',
+                iconColor: iconColor || 'warn'
             } as IAlert,
             disableClose: true
         } as MatDialogConfig);
@@ -99,7 +116,15 @@ export class ToolsService {
      * @param btn2Text - The text for button 2 (default is Cancel)
      * @param btn3Text - The text for button 3 (default is Maybe)
      */
-    genericChoice(title: string, msg: string | SafeHtml, btn1Text: string = 'OK', btn2Text: string = 'Cancel', btn3Text: string = 'Maybe'): MatDialogRef<AlertComponent> {
+    genericChoice(
+        title: string, 
+        msg: string | SafeHtml, 
+        btn1Text: string = 'OK', 
+        btn2Text: string = 'Cancel', 
+        btn3Text: string = 'Maybe', 
+        icon?: string, 
+        iconColor?: string
+    ): MatDialogRef<AlertComponent> {
         return this._dialog.open(AlertComponent, {
             data: {
                 title,
@@ -108,7 +133,9 @@ export class ToolsService {
                 buttonText2: btn2Text,
                 buttonText3: btn3Text,
                 showButton2: true,
-                showButton3: true
+                showButton3: true,
+                icon: icon || '',
+                iconColor: iconColor || 'warn'
             } as IAlert,
             disableClose: true
         } as MatDialogConfig);
@@ -118,7 +145,7 @@ export class ToolsService {
      * Displays an error using a MatDialog
      */
     onAppError(error: HttpErrorResponse): MatDialogRef<AlertComponent> {
-        return this.genericError(this._appErrorTitle, this._appErrorMsg, error);
+        return this.genericError(this._appErrorTitle, this._appErrorMsg, error, 'error');
     }
 
     /**

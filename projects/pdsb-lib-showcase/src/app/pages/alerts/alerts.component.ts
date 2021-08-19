@@ -16,12 +16,12 @@ export class AlertsComponent implements OnInit {
     }
 
     genericError() {
-        this._ts.genericError('Title', 'Error message');
+        this._ts.genericError('Title', 'Error message', null, 'error', 'warn');
     }
 
     genericConfirm() {
         this._ts
-            .genericConfirm('Title', 'Error message', 'Button1', 'Button2')
+            .genericConfirm('Title', 'Error message', 'Button1', 'Button2', 'info', 'primary')
             .afterClosed()
             .subscribe({
                 next: (txt: string) => {
@@ -32,7 +32,7 @@ export class AlertsComponent implements OnInit {
 
     genericChoice() {
         this._ts
-            .genericChoice('Title', 'Choice', 'Button1', 'Button2', 'Button3')
+            .genericChoice('Title', 'Choice', 'Button1', 'Button2', 'Button3', 'warning', 'accent')
             .afterClosed()
             .subscribe({
                 next: (txt: string) => {

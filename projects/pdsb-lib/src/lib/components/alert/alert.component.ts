@@ -27,6 +27,8 @@ export class AlertComponent implements OnInit {
     buttonText3 = 'Cancel';
     showButton2 = false;
     showButton3 = false;
+    icon        = '';
+    iconColor   = 'alert';
 
     constructor(
         private _dialogRef: MatDialogRef<AlertComponent>,
@@ -42,7 +44,7 @@ export class AlertComponent implements OnInit {
         this._dialogRef.disableClose = true;
 
         const options    = this._data;
-        this.title       = options.title || this.title;
+        this.title       = options.title   || this.title;
         this.message     = options.message || '';
         // Set the button text
         this.buttonText1 = options.buttonText1 || this.buttonText1;
@@ -51,5 +53,8 @@ export class AlertComponent implements OnInit {
         // Set the button visibility
         this.showButton2 = options.showButton2 || false;
         this.showButton3 = options.showButton3 || false;
+        // Set the icon
+        this.icon        = options.icon      || '';
+        this.iconColor   = options.iconColor || 'warn';
     }
 }

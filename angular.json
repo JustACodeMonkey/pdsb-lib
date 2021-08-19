@@ -62,7 +62,6 @@
             "main": "projects/pdsb-lib-showcase/src/main.ts",
             "polyfills": "projects/pdsb-lib-showcase/src/polyfills.ts",
             "tsConfig": "projects/pdsb-lib-showcase/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/pdsb-lib-showcase/src/favicon.ico",
               "projects/pdsb-lib-showcase/src/assets"
@@ -70,7 +69,13 @@
             "styles": [
               "projects/pdsb-lib-showcase/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -100,7 +105,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
