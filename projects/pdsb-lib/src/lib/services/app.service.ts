@@ -57,7 +57,7 @@ export class AppService {
      * Forces the window to refresh
      */
     forceRefresh(): void {
-        this._doc.location.reload(true);
+        this._doc.location.reload();
     }
 
     private href(): string {

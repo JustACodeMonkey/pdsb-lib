@@ -1,6 +1,6 @@
 {
   "name": "pdsb-lib",
-  "version": "12.0.3",
+  "version": "13.0.0",
   "description": "This library contains components and services to support SIS Angular applications at the Peel District School Board.",
   "license": "MIT",
   "repository": {
@@ -9,13 +9,13 @@
   },
   "homepage": "https://github.com/JustACodeMonkey/pdsb-lib",
   "peerDependencies": {
-    "@angular/common": ">= 12.0.0 || >= 13.0.0 || >= 14.0.0 || >= 15.0.0",
-    "@angular/core": ">= 12.0.0 || >= 13.0.0 || >= 14.0.0 || >= 15.0.0",
-    "@angular/material": ">= 12.0.0 || >= 13.0.0 || >= 14.0.0 || >= 15.0.0",
-    "@angular/cdk": ">= 12.0.0 || >= 13.0.0 || >= 14.0.0 || >= 15.0.0",
-    "@angular/flex-layout": ">= 12.0.0-beta.34 || >= 13.0.0-beta.35 || >= 14.0.0-beta.36 || >= 15.0.0-beta.37",
-    "@ng-idle/core": ">=9.0.0-beta.1 || >=10.0.0-beta.1 || >=11.0.0 || >=12.0.0",
-    "@ng-idle/keepalive": ">=9.0.0-beta.1 || >=10.0.0-beta.1 || >=11.0.0 || >=12.0.0"
+    "@angular/common": ">= 13.0.0 || >= 14.0.0 || >= 15.0.0 || >= 16.0.0 || >= 17.0.0 || >= 18.0.0",
+    "@angular/core": ">= 13.0.0 || >= 14.0.0 || >= 15.0.0 || >= 16.0.0 || >= 17.0.0 || >= 18.0.0",
+    "@angular/material": ">= 13.0.0 || >= 14.0.0 || >= 15.0.0 || >= 16.0.0 || >= 17.0.0 || >= 18.0.0",
+    "@angular/cdk": ">= 13.0.0 || >= 14.0.0 || >= 15.0.0 || >= 16.0.0 || >= 17.0.0 || >= 18.0.0",
+    "@angular/flex-layout": ">= 13.0.0-beta.35 || >= 14.0.0-beta.36 || >= 15.0.0-beta.37",
+    "@ng-idle/core": ">=11.0.0 || >=12.0.0 || >= 13.0.0 || >= 14.0.0 || >= 15.0.0 || >= 16.0.0",
+    "@ng-idle/keepalive": ">=11.0.0 || >=12.0.0 || >= 13.0.0 || >= 14.0.0 || >= 15.0.0 || >= 16.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"

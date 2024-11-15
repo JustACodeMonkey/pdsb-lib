@@ -1,5 +1,5 @@
-# pdsb-lib v12.0.3
-v12.0.3 is compiled with Ivy and requires Angular 12 or higher.
+# pdsb-lib v13.0.0
+v13.0.0 is compiled with Ivy and requires Angular 13 or higher.
 
 This library contains components and services to support SIS Angular applications at the Peel District School Board.
 
